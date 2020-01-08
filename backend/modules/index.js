@@ -37,13 +37,13 @@ export default () => {
 
   app.use(koaLogger());
   const pug = new Pug({
-    viewPath: path.join(__dirname, '..', '..', 'web', 'views'),
+    viewPath: path.join(__dirname, '..', '..', 'views'),
     debug: true,
     pretty: true,
     compileDebug: true,
     locals: [],
     noCache: process.env.NODE_ENV !== 'production',
-    basedir: path.join(__dirname, '..', 'views'),
+    basedir: path.join(__dirname, 'views'),
     helperPath: [
       { _ },
       { urlFor: (...args) => router.url(...args) },

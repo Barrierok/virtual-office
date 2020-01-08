@@ -1,6 +1,7 @@
 // Update with your config settings.
 require('dotenv').config();
 const path = require('path');
+const { knexSnakeCaseMappers } = require('objection');
 
 const BASE_PATH = path.join(__dirname, 'backend', 'db');
 
@@ -19,4 +20,5 @@ module.exports = {
       directory: path.join(BASE_PATH, 'seeds'),
     },
   },
+  ...knexSnakeCaseMappers(),
 };
