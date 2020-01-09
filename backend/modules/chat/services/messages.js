@@ -1,9 +1,11 @@
 import repositories from '../repositories';
 
 const createResult = message => ({
-  type: 'messages',
-  id: message.id,
-  attributes: message,
+  data: {
+    type: 'messages',
+    id: message.id,
+    attributes: message,
+  },
 });
 
 export default class MessagesService {

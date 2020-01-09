@@ -10,6 +10,7 @@ import koaLogger from 'koa-logger';
 import koaWebpack from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
 import _ from 'lodash';
+import addChatRoutes from './chat/routes';
 
 import webpackConfig from '../webpack.config';
 
@@ -54,7 +55,7 @@ export default () => {
   const server = http.createServer(app.callback());
   const io = socket(server);
 
-  addRoutes(router, io);
+  addChatRoutes(router, io);
   app.use(router.allowedMethods());
   app.use(router.routes());
 

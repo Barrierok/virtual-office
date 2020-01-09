@@ -1,10 +1,13 @@
 import repositories from '../repositories';
 
 const createResult = channel => ({
-  type: 'channels',
-  id: channel.id,
-  attributes: channel,
+  data: {
+    type: 'channels',
+    id: channel.id,
+    attributes: channel,
+  },
 });
+
 export default class ChannelsService {
   constructor() {
     this.channelsRepository = new repositories.ChannelsRepository();
@@ -15,9 +18,9 @@ export default class ChannelsService {
   }
 
   insertChannel(data) {
-    const channel = this.channelsRepository.insertChannel(data);
+    const insertedChannel = this.channelsRepository.insertChannel(data);
 
-    return createResult(channel);
+    return createResult(insertedChannel);
   }
 
   updateChannel(id, newData) {

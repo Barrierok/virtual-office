@@ -1,8 +1,8 @@
-import { Message } from '../models';
+import repositories from '../models';
 
 export default class MessagesRepository {
   constructor() {
-    this.query = Message.query();
+    this.query = repositories.Message.query();
   }
 
   getMessagesByChannelId(id) {
