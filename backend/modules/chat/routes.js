@@ -60,8 +60,6 @@ export default (router, io) => {
     .get('root', '/', (ctx) => {
       ctx.render('index', {
         gon: {
-          channels: channelsService.getChannels(),
-          messages: messagesService.getAllMessages(),
         },
       });
     })

@@ -5,15 +5,33 @@ export default class MessagesRepository {
     this.query = repositories.Message.query();
   }
 
-  getMessagesByChannelId(id) {
-    return this.query.where('channelId', id);
+  async getMessagesByChannelId(id) {
+    try {
+      const messages = await this.query.where('channelId', id);
+      return messages;
+    } catch (e) {
+      console.log(e);
+      throw new Error(e);
+    }
   }
 
-  getAllMessages() {
-    return this.query;
+  async getAllMessages() {
+    try {
+      const messages = await this.query;
+      return messages;
+    } catch (e) {
+      console.log(e);
+      throw new Error(e);
+    }
   }
 
-  insertMessage(data) {
-    return this.query.insert(data).returning('*');
+  async insertMessage(data) {
+    try {
+      const message = await this.query.insert(data).returning('*');
+      return message;
+    } catch (e) {
+      console.log(e);
+      throw new Error(e);
+    }
   }
 }

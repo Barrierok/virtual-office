@@ -4,7 +4,12 @@
   "description": "Chat, News, Task Manager",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build-server": "babel backend --out-dir dist --source-maps inline",
+    "build-app": "npx webpack -p --env production",
+    "build": "npm run build-app && npm run build-server",
+    "postinstall": "npm run build",
+    "start": "node backend/bin/app.js"
   },
   "dependencies": {
     "@babel/cli": "^7.7.7",

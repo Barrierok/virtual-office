@@ -1,5 +1,5 @@
 start:
-	npx nodemon --exec npx babel-node server/bin/slack.js
+	npx nodemon --exec npx babel-node backend/bin/app.js
 
 build:
 	rm -rf dist
