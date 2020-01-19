@@ -5,7 +5,7 @@ export default class Channel extends Model {
     return 'channels';
   }
 
-  static jsonSchema() {
+  static get jsonSchema() {
     return {
       type: 'object',
       required: ['removable', 'name'],

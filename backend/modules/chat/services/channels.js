@@ -13,25 +13,23 @@ export default class ChannelsService {
     this.channelsRepository = new repositories.ChannelsRepository();
   }
 
-  getChannels() {
-    return this.channelsRepository.getChannels();
+  async getChannels() {
+    const result = await this.channelsRepository.getChannels();
+    return result;
   }
 
-  insertChannel(data) {
-    const insertedChannel = this.channelsRepository.insertChannel(data);
-
+  async insertChannel(data) {
+    const insertedChannel = await this.channelsRepository.insertChannel(data);
     return createResult(insertedChannel);
   }
 
-  updateChannel(id, newData) {
-    const updatedChannel = this.channelsRepository.updateChannel(id, newData);
-
+  async updateChannel(id, newData) {
+    const updatedChannel = await this.channelsRepository.updateChannel(id, newData);
     return createResult(updatedChannel);
   }
 
-  deleteChannel(id) {
-    const deletedChannel = this.channelsRepository.deleteChannel(id);
-
+  async deleteChannel(id) {
+    const deletedChannel = await this.channelsRepository.deleteChannel(id);
     return createResult(deletedChannel);
   }
 }

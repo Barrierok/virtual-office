@@ -1,8 +1,8 @@
-import repositories from '../models';
+import models from '../models';
 
 export default class ChannelsRepository {
   constructor() {
-    this.query = repositories.Channel.query();
+    this.query = models.Channel.query();
   }
 
   async getChannels() {

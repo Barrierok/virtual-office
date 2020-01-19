@@ -7,49 +7,49 @@ export default (router, io) => {
   const apiRouter = new Router();
 
   apiRouter
-    .get('/channels', (ctx) => {
-      ctx.body = channelsService.getChannels();
+    .get('/channels', async (ctx) => {
+      ctx.body = await channelsService.getChannels();
     })
-    .post('/channels', (ctx) => {
+    .post('/channels', async (ctx) => {
       const { data: { attributes: { name } } } = ctx.request.body;
       const channel = {
         name,
         removable: true,
       };
-      const data = channelsService.insertChannel(channel);
+      const data = await channelsService.insertChannel(channel);
 
       ctx.status = 201;
       ctx.body = data;
       io.emit('newChannel', data);
     })
-    .delete('/channels/:id', (ctx) => {
+    .delete('/channels/:id', async (ctx) => {
       const channelId = Number(ctx.params.id);
-      const data = channelsService.deleteChannel(channelId);
+      const data = await channelsService.deleteChannel(channelId);
 
       ctx.status = 204;
       io.emit('removeChannel', data);
     })
-    .patch('channels/:id', (ctx) => {
+    .patch('channels/:id', async (ctx) => {
       const channelId = Number(ctx.params.id);
       const { attributes } = ctx.request.body.data;
-      const data = channelsService.updateChannel(channelId, attributes);
+      const data = await channelsService.updateChannel(channelId, attributes);
 
       ctx.status = 204;
       io.emit('renameChannel', data);
     })
-    .get('/channels/:channelId/messages', (ctx) => {
+    .get('/channels/:channelId/messages', async (ctx) => {
       const channelId = Number(ctx.params.channelId);
-      const resources = messagesService.getMessagesByChannelId(channelId);
+      const resources = await messagesService.getMessagesByChannelId(channelId);
 
       ctx.body = resources;
     })
-    .post('/channels/:channelId/messages', (ctx) => {
+    .post('/channels/:channelId/messages', async (ctx) => {
       const { data: { attributes } } = ctx.request.body;
       const message = {
         ...attributes,
         channelId: Number(ctx.params.channelId),
       };
-      const data = messagesService.insertMessage(message);
+      const data = await messagesService.insertMessage(message);
 
       ctx.status = 201;
       ctx.body = data;
@@ -57,9 +57,12 @@ export default (router, io) => {
     });
 
   return router
-    .get('root', '/', (ctx) => {
-      ctx.render('index', {
+    .get('root', '/', async (ctx) => {
+      console.log(__dirname);
+      await ctx.render('index', {
         gon: {
+          channels: await channelsService.getChannels(),
+          messages: await messagesService.getAllMessages(),
         },
       });
     })

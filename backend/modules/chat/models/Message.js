@@ -5,7 +5,7 @@ export default class Message extends Model {
     return 'messages';
   }
 
-  static jsonSchema() {
+  static get jsonSchema() {
     return {
       type: 'object',
       required: ['data', 'author', 'channelId'],

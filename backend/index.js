@@ -1,16 +1,15 @@
 import path from 'path';
 import Koa from 'koa';
-import Pug from 'koa-pug';
 import socket from 'socket.io';
 import http from 'http';
 import mount from 'koa-mount';
 import serve from 'koa-static';
+import views from 'koa-views';
 import Router from 'koa-router';
 import koaLogger from 'koa-logger';
 import koaWebpack from 'koa-webpack';
 import bodyParser from 'koa-bodyparser';
 import { Model } from 'objection';
-import _ from 'lodash';
 import Knex from 'knex';
 import errorHandler from './lib/errorHandler';
 
@@ -40,23 +39,14 @@ export default () => {
     app.use(mount(urlPrefix, serve(assetsPath)));
   }
 
+  app.use(views(
+    path.join(__dirname, '..', 'views'),
+    { extension: 'pug' },
+  ));
+
   const router = new Router();
 
   app.use(koaLogger());
-  const pug = new Pug({
-    viewPath: path.join(__dirname, '..', 'views'),
-    debug: true,
-    pretty: true,
-    compileDebug: true,
-    locals: [],
-    noCache: process.env.NODE_ENV !== 'production',
-    basedir: path.join(__dirname, 'views'),
-    helperPath: [
-      { _ },
-      { urlFor: (...args) => router.url(...args) },
-    ],
-  });
-  pug.use(app);
 
   const server = http.createServer(app.callback());
   const io = socket(server);

@@ -13,19 +13,18 @@ export default class MessagesService {
     this.messagesRepository = new repositories.MessagesRepository();
   }
 
-  getAllMessages() {
-    return this.messagesRepository.getAllMessages();
+  async getAllMessages() {
+    const messages = await this.messagesRepository.getAllMessages();
+    return messages;
   }
 
-  getMessagesByChannelId(channelId) {
-    const messages = this.messagesRepository.getMessagesByChannelId(channelId);
-
+  async getMessagesByChannelId(channelId) {
+    const messages = await this.messagesRepository.getMessagesByChannelId(channelId);
     return messages.map(m => createResult(m));
   }
 
-  insertMessage(data) {
-    const message = this.messagesRepository.insertMessage(data);
-
+  async insertMessage(data) {
+    const message = await this.messagesRepository.insertMessage(data);
     return createResult(message);
   }
 }

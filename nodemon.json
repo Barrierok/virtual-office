@@ -1,4 +1,4 @@
 {
   "verbose": true,
-  "watch": ["server", "webpack.config.js"]
+  "watch": ["backend", "views", "web", "webpack.config.js"]
 }
