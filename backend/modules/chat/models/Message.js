@@ -5,10 +5,10 @@ export default class Message extends Model {
     return 'messages';
   }
 
-  static jsonSchema() {
+  static get jsonSchema() {
     return {
       type: 'object',
-      required: ['data', 'author', 'channelId'],
+      required: ['text', 'author', 'channelId'],
       properties: {
         id: { type: 'integer' },
         author: { type: 'string', minLength: 1, maxLength: 100 },

@@ -8,7 +8,7 @@ exports.up = knex => (
     })
     .createTable('messages', (table) => {
       table.increments('id').primary();
-      table.string('data');
+      table.string('text');
       table.string('author');
       table
         .integer('channel_id')
