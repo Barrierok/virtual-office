@@ -5,6 +5,9 @@ build:
 	rm -rf dist
 	npm run build
 
+install:
+	npm i
+
 test:
 	npm test
 
@@ -14,7 +17,7 @@ lint:
 publish:
 	npm publish
 
-init database:
-	knex migrate:latest && knex seed:run
+init:
+	make install && knex migrate:latest && knex seed:run
 
 .PHONY: test
