@@ -1,4 +1,4 @@
-dev:
+start:
 	npx nodemon --exec npx babel-node backend/bin/app.js
 
 build:
@@ -13,5 +13,8 @@ lint:
 
 publish:
 	npm publish
+
+init database:
+	knex migrate:latest && knex seed:run
 
 .PHONY: test
