@@ -2,12 +2,12 @@ import models from '../models';
 
 export default class ChannelsRepository {
   constructor() {
-    this.query = models.Channel.query();
+    this.model = models.Channel;
   }
 
   async getChannels() {
     try {
-      const channels = await this.query;
+      const channels = await this.model.query();
       return channels;
     } catch (e) {
       console.log(e);
@@ -17,7 +17,10 @@ export default class ChannelsRepository {
 
   async insertChannel(data) {
     try {
-      const channel = await this.query.insert(data).returning('*');
+      const channel = await this.model
+        .query()
+        .insert(data)
+        .returning('*');
       return channel;
     } catch (e) {
       console.log(e);
@@ -27,7 +30,11 @@ export default class ChannelsRepository {
 
   async updateChannel(id, newData) {
     try {
-      const channel = await this.query.findById(id).patch(newData).returning('*');
+      const channel = await this.model
+        .query()
+        .findById(id)
+        .patch(newData)
+        .returning('*');
       return channel;
     } catch (e) {
       console.log(e);
@@ -37,7 +44,11 @@ export default class ChannelsRepository {
 
   async deleteChannel(id) {
     try {
-      const channel = await this.query.findById(id).delete().returning('*');
+      const channel = await this.model
+        .query()
+        .findById(id)
+        .delete()
+        .returning('*');
       return channel;
     } catch (e) {
       console.log(e);

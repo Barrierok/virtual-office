@@ -29,7 +29,7 @@ export default (router, io) => {
       ctx.status = 204;
       io.emit('removeChannel', data);
     })
-    .patch('channels/:id', async (ctx) => {
+    .patch('/channels/:id', async (ctx) => {
       const channelId = Number(ctx.params.id);
       const { attributes } = ctx.request.body.data;
       const data = await channelsService.updateChannel(channelId, attributes);
@@ -45,6 +45,7 @@ export default (router, io) => {
     })
     .post('/channels/:channelId/messages', async (ctx) => {
       const { data: { attributes } } = ctx.request.body;
+      console.log(attributes);
       const message = {
         ...attributes,
         channelId: Number(ctx.params.channelId),

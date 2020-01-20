@@ -1,4 +1,4 @@
-start:
+dev:
 	npx nodemon --exec npx babel-node backend/bin/app.js
 
 build:
