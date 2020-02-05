@@ -46,8 +46,7 @@ export default class ChannelsRepository {
     try {
       const channel = await this.model
         .query()
-        .findById(id)
-        .delete()
+        .deleteById(id)
         .returning('*');
       return channel;
     } catch (e) {
