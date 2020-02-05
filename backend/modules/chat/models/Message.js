@@ -1,6 +1,6 @@
-import { Model } from 'objection';
+import BaseModel from '../../../lib/BaseModel';
 
-export default class Message extends Model {
+export default class Message extends BaseModel {
   static get tableName() {
     return 'messages';
   }
