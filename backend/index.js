@@ -15,6 +15,7 @@ import errorHandler from './lib/errorHandler';
 
 import knexConfig from '../knexfile';
 import addChatRoutes from './modules/chat/routes';
+import addNewsRoutes from './modules/news/routes';
 import webpackConfig from '../webpack.config';
 
 const isProduction = process.env.NODE_ENV === 'production';
@@ -51,8 +52,8 @@ export default () => {
   const server = http.createServer(app.callback());
   const io = socket(server);
   app.use(errorHandler);
-
   addChatRoutes(router, io);
+  addNewsRoutes(router, io);
   app.use(router.allowedMethods());
   app.use(router.routes());
 
