@@ -1,6 +1,6 @@
 import repositories from '../repositories';
 
-const createResult = channel => ({
+const createResult = (channel) => ({
   data: {
     type: 'channels',
     id: channel.id,

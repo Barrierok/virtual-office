@@ -41,10 +41,10 @@ initValues(gon);
 
 const mappingListener = (event, serverData) => {
   const mapping = {
-    [addMessageActionName]: data => addMessageSuccess({ message: data }),
-    [addChannelActionName]: data => addChannelSuccess({ channel: data }),
-    [removeChannelActionName]: data => removeChannelSuccess({ id: data }),
-    [renameChannelActionName]: data => renameChannelSuccess({ channel: data }),
+    [addMessageActionName]: (data) => addMessageSuccess({ message: data }),
+    [addChannelActionName]: (data) => addChannelSuccess({ channel: data }),
+    [removeChannelActionName]: (data) => removeChannelSuccess({ id: data }),
+    [renameChannelActionName]: (data) => renameChannelSuccess({ channel: data }),
   };
   return store.dispatch(mapping[event](serverData));
 };
