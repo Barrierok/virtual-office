@@ -4,7 +4,7 @@ import connect from '../../utils/connect';
 
 const mapStateToProps = (state) => {
   const { messages: { messages }, channels: { activeChannel } } = state;
-  const filteredMessages = messages.filter(m => m.channelId === activeChannel);
+  const filteredMessages = messages.filter((m) => m.channelId === activeChannel);
   return { messages: filteredMessages };
 };
 
@@ -31,7 +31,7 @@ class Chat extends React.PureComponent {
     const { messages } = this.props;
     return (
       <section className="fields">
-        {messages.map(ms => (
+        {messages.map((ms) => (
           <div className="message d-block m-1 p-1 mw-30" key={ms.id}>
             <h6>{ms.author}</h6>
             <p className="m-0 p-0">{ms.text}</p>

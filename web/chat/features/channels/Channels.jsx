@@ -31,13 +31,13 @@ class Channels extends React.PureComponent {
     this.setState({ isOpenForm: !isOpenForm });
   }
 
-  setActiveChannel = activeChannel => (e) => {
+  setActiveChannel = (activeChannel) => (e) => {
     e.preventDefault();
     const { setActiveChannel } = this.props;
     setActiveChannel({ activeChannel });
   }
 
-  handleRemove = id => () => {
+  handleRemove = (id) => () => {
     const { showModal } = this.props;
     showModal({ modalType: removeChannelType, modalProps: { id } });
   }
