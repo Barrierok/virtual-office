@@ -19,7 +19,7 @@ import knexConfig from '../knexfile';
 import addChatRoutes from './modules/chat/routes';
 import addUserRoutes from './modules/auth/routes';
 import webpackConfig from '../webpack.config';
-import './modules/auth/utils';
+import './modules/auth/utils/configuratePassport';
 
 const isProduction = process.env.NODE_ENV === 'production';
 const isDevelopment = !isProduction;
@@ -29,6 +29,8 @@ export default () => {
   const knex = Knex(knexConfig.development);
   Model.knex(knex);
 
+  app.keys = [`${process.env.secret}`];
+  app.use(session({}, app));
   app.use(bodyParser());
   app.use(views(
     path.join(__dirname, '..', 'views'),
@@ -36,8 +38,6 @@ export default () => {
   ));
   app.use(koaLogger());
   app.use(errorHandler);
-  app.keys = [process.env.secret];
-  app.use(session({}, app));
   app.use(passport.initialize());
   app.use(passport.session());
   // app.use(serve(path.join(__dirname, '..', 'public')));
@@ -57,8 +57,8 @@ export default () => {
   const io = socket(server);
 
   const router = new Router();
-  addChatRoutes(router, io);
   addUserRoutes(router);
+  addChatRoutes(router, io);
   app.use(router.allowedMethods());
   app.use(router.routes());
 
