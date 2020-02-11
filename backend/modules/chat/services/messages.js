@@ -1,6 +1,6 @@
 import repositories from '../repositories';
 
-const createResult = message => ({
+const createResult = (message) => ({
   data: {
     type: 'messages',
     id: message.id,

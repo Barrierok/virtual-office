@@ -45,7 +45,6 @@ export default (router, io) => {
     })
     .post('/channels/:channelId/messages', async (ctx) => {
       const { data: { attributes } } = ctx.request.body;
-      console.log(attributes);
       const message = {
         ...attributes,
         channelId: Number(ctx.params.channelId),
@@ -58,14 +57,13 @@ export default (router, io) => {
     });
 
   return router
-    .get('root', '/', async (ctx) => {
-      console.log(__dirname);
-      await ctx.render('index', {
+    .get('root', '/chat', async (ctx) => {
+      await ctx.render('chat', {
         gon: {
           channels: await channelsService.getChannels(),
           messages: await messagesService.getAllMessages(),
         },
       });
     })
-    .use('/api/v1', apiRouter.routes(), apiRouter.allowedMethods());
+    .use('/api/v1/chat', apiRouter.routes(), apiRouter.allowedMethods());
 };
