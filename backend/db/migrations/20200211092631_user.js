@@ -1,14 +1,14 @@
 
-exports.up = knex => (
+exports.up = (knex) => (
   knex.schema
     .createTable('users', (table) => {
       table.increments('id').primary();
-      table.string('username');
+      table.string('username').unique();
       table.string('password');
     })
 );
 
-exports.down = knex => (
+exports.down = (knex) => (
   knex.schema
     .dropTableIfExists('users')
 );

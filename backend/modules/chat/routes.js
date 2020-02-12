@@ -1,5 +1,6 @@
 import Router from 'koa-router';
 import services from './services';
+import authenticated from '../auth/utils';
 
 export default (router, io) => {
   const channelsService = new services.ChannelsService();
@@ -7,14 +8,17 @@ export default (router, io) => {
   const apiRouter = new Router();
 
   apiRouter
-    .get('/channels', async (ctx) => {
+    .get('/channels', authenticated(), async (ctx) => {
       ctx.body = await channelsService.getChannels();
     })
-    .post('/channels', async (ctx) => {
+    .post('/channels', authenticated(), async (ctx) => {
       const { data: { attributes: { name } } } = ctx.request.body;
+      const { user } = ctx.state;
+      console.log(user);
       const channel = {
         name,
         removable: true,
+        ownerId: user.id,
       };
       const data = await channelsService.insertChannel(channel);
 
@@ -22,14 +26,14 @@ export default (router, io) => {
       ctx.body = data;
       io.emit('newChannel', data);
     })
-    .delete('/channels/:id', async (ctx) => {
+    .delete('/channels/:id', authenticated(), async (ctx) => {
       const channelId = Number(ctx.params.id);
       const data = await channelsService.deleteChannel(channelId);
 
       ctx.status = 204;
       io.emit('removeChannel', data);
     })
-    .patch('/channels/:id', async (ctx) => {
+    .patch('/channels/:id', authenticated(), async (ctx) => {
       const channelId = Number(ctx.params.id);
       const { attributes } = ctx.request.body.data;
       const data = await channelsService.updateChannel(channelId, attributes);
@@ -37,16 +41,18 @@ export default (router, io) => {
       ctx.status = 204;
       io.emit('renameChannel', data);
     })
-    .get('/channels/:channelId/messages', async (ctx) => {
+    .get('/channels/:channelId/messages', authenticated(), async (ctx) => {
       const channelId = Number(ctx.params.channelId);
       const resources = await messagesService.getMessagesByChannelId(channelId);
 
       ctx.body = resources;
     })
-    .post('/channels/:channelId/messages', async (ctx) => {
+    .post('/channels/:channelId/messages', authenticated(), async (ctx) => {
       const { data: { attributes } } = ctx.request.body;
+      const { user } = ctx.state;
       const message = {
         ...attributes,
+        ownerId: user.id,
         channelId: Number(ctx.params.channelId),
       };
       const data = await messagesService.insertMessage(message);
@@ -57,11 +63,16 @@ export default (router, io) => {
     });
 
   return router
-    .get('root', '/chat', async (ctx) => {
+    .get('/chat', authenticated(), async (ctx) => {
+      const channels = await channelsService.getChannels();
+      const messages = await messagesService.getAllMessages();
+      const { username } = ctx.state.user;
       await ctx.render('chat', {
         gon: {
-          channels: await channelsService.getChannels(),
-          messages: await messagesService.getAllMessages(),
+          username,
+          channels,
+          messages,
+          currentChannelId: channels[0].id,
         },
       });
     })

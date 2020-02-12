@@ -7,7 +7,7 @@ export default class ChannelsRepository {
 
   async getChannels() {
     try {
-      const channels = await this.model.query();
+      const channels = await this.model.query().orderBy('createdAt');
       return channels;
     } catch (e) {
       console.log(e);

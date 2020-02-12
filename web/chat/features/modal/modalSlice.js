@@ -1,5 +1,5 @@
 /* eslint-disable no-param-reassign */
-import { createSlice } from 'redux-starter-kit';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   modalType: null,

@@ -19,9 +19,8 @@ const mapStateToProps = (state) => {
 class MessageForm extends React.PureComponent {
   handleSubmit = async (values, actions) => {
     const { addMessage, activeChannel } = this.props;
-    const author = this.context;
     try {
-      await addMessage({ author, activeChannel, ...values });
+      await addMessage({ activeChannel, ...values });
       actions.resetForm();
       actions.setSubmitting(false);
     } catch (e) {
