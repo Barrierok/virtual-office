@@ -11,9 +11,9 @@ export default class Header extends React.PureComponent {
       <Navbar bg="primary" variant="dark">
         <Navbar.Brand href="/">Brand</Navbar.Brand>
         <Nav className="mr-auto">
+          <Nav.Link disabled={active === 'manager'} href="/task">Manager</Nav.Link>
           <Nav.Link disabled={active === 'chat'} href="/chat">Chat</Nav.Link>
           <Nav.Link disabled={active === 'news'} href="/news">News</Nav.Link>
-          <Nav.Link disabled={active === 'manager'} href="/task">Manager</Nav.Link>
         </Nav>
         <Nav>
           <NavDropdown alignRight title={this.context}>
