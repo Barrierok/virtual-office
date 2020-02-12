@@ -17,6 +17,7 @@ import errorHandler from './lib/errorHandler';
 
 import knexConfig from '../knexfile';
 import addChatRoutes from './modules/chat/routes';
+import addNewsRoutes from './modules/news/routes';
 import addUserRoutes from './modules/auth/routes';
 import webpackConfig from '../webpack.config';
 import './modules/auth/utils/configuratePassport';
@@ -55,9 +56,10 @@ export default () => {
 
   const server = http.createServer(app.callback());
   const io = socket(server);
-
+  app.use(errorHandler);
   const router = new Router();
   addUserRoutes(router);
+  addNewsRoutes(router, io);
   addChatRoutes(router, io);
   app.use(router.allowedMethods());
   app.use(router.routes());
