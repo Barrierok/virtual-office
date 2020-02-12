@@ -1,10 +1,11 @@
+import _ from 'lodash';
 import repositories from '../repositories';
 import services from '../../auth/services';
 
 const setUser = async (message) => {
   const usersService = new services.UsersService();
   const { username: author } = await usersService.getById(message.ownerId);
-  return { ...message, author };
+  return _.omit({ ...message, author }, 'ownerId');
 };
 
 const createResult = async (message) => ({

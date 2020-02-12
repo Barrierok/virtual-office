@@ -23,7 +23,7 @@ const messages = createSlice({
   },
   extraReducers: {
     [removeChannelSuccess]: (state, { payload: { id } }) => {
-      _.remove(state.messages, (m => m.channelId === id));
+      _.remove(state.messages, ((m) => m.channelId === id));
     },
   },
 });

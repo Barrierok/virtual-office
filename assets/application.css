@@ -1,5 +1,5 @@
 html {
-  font-size: 14px;
+  font-size: 18px;
 }
 
 body {
@@ -9,22 +9,26 @@ body {
 }
 
 #chat {
-  height: calc(100% - 50px);
+  height: calc(100% - 63px);
 }
 
 .fields {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 90%;
+}
+
+.channels {
+  overflow-y: auto;
 }
 
 .form input, form .btn {
   height: 3rem;
 }
 
-.message h6 {
-  font-size: 0.8rem;
-}
-
 .message p {
   word-wrap: break-word;
+}
+
+strong {
+  font-size: large;
 }
