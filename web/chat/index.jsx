@@ -2,8 +2,6 @@ import '@babel/polyfill';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../assets/application.css';
 import gon from 'gon';
-import faker from 'faker';
-import cookies from 'js-cookie';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
@@ -22,11 +20,7 @@ import {
   addChannelActionName, removeChannelActionName, renameChannelActionName, addMessageActionName,
 } from './utils/constants';
 
-let username = cookies.get('username');
-if (!username) {
-  username = faker.name.findName();
-  cookies.set('username', username);
-}
+const { username } = gon;
 
 const store = configureStore({
   reducer: reducers,

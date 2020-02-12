@@ -59,10 +59,15 @@ export default (router, io) => {
 
   return router
     .get('/chat', authenticated(), async (ctx) => {
+      const channels = await channelsService.getChannels();
+      const messages = await messagesService.getAllMessages();
+      const { username } = ctx.state.user;
       await ctx.render('chat', {
         gon: {
-          channels: await channelsService.getChannels(),
-          messages: await messagesService.getAllMessages(),
+          username,
+          channels,
+          messages,
+          currentChannelId: channels[0].id,
         },
       });
     })
