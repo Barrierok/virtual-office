@@ -1,10 +1,17 @@
 import repositories from '../repositories';
+import services from '../../auth/services';
 
-const createResult = (message) => ({
+const setUser = async (message) => {
+  const usersService = new services.UsersService();
+  const { username: author } = await usersService.getById(message.ownerId);
+  return { ...message, author };
+};
+
+const createResult = async (message) => ({
   data: {
     type: 'messages',
     id: message.id,
-    attributes: message,
+    attributes: await setUser(message),
   },
 });
 
@@ -15,12 +22,12 @@ export default class MessagesService {
 
   async getAllMessages() {
     const messages = await this.messagesRepository.getAllMessages();
-    return messages;
+    return Promise.all(messages.map((m) => setUser(m)));
   }
 
   async getMessagesByChannelId(channelId) {
     const messages = await this.messagesRepository.getMessagesByChannelId(channelId);
-    return messages.map(m => createResult(m));
+    return Promise.all(messages.map((m) => createResult(m)));
   }
 
   async insertMessage(data) {

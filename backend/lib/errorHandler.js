@@ -9,7 +9,6 @@ import {
   DataError,
 } from 'objection';
 
-// In this example `ctx` is an expctxs ctxponse object.
 export default async (ctx, next) => {
   try {
     await next();

@@ -13,9 +13,12 @@ export default (router, io) => {
     })
     .post('/channels', authenticated(), async (ctx) => {
       const { data: { attributes: { name } } } = ctx.request.body;
+      const { user } = ctx.state;
+      console.log(user);
       const channel = {
         name,
         removable: true,
+        ownerId: user.id,
       };
       const data = await channelsService.insertChannel(channel);
 
@@ -46,8 +49,10 @@ export default (router, io) => {
     })
     .post('/channels/:channelId/messages', authenticated(), async (ctx) => {
       const { data: { attributes } } = ctx.request.body;
+      const { user } = ctx.state;
       const message = {
         ...attributes,
+        ownerId: user.id,
         channelId: Number(ctx.params.channelId),
       };
       const data = await messagesService.insertMessage(message);
