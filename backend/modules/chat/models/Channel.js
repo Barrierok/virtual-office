@@ -14,6 +14,8 @@ export default class Channel extends BaseModel {
         name: { type: 'string', minLength: 1, maxLength: 255 },
         removable: { type: 'boolean' },
         ownerId: { type: 'integer' },
+        createdAt: { type: 'date-time' },
+        updatedAt: { type: 'date-time' },
       },
     };
   }

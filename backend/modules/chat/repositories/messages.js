@@ -9,7 +9,8 @@ export default class MessagesRepository {
     try {
       const messages = await this.model
         .query()
-        .where('channelId', id);
+        .where('channelId', id)
+        .orderBy('createdAt');
       return messages;
     } catch (e) {
       console.log(e);
@@ -19,7 +20,7 @@ export default class MessagesRepository {
 
   async getAllMessages() {
     try {
-      const messages = await this.model.query();
+      const messages = await this.model.query().orderBy('createdAt');
       return messages;
     } catch (e) {
       console.log(e);

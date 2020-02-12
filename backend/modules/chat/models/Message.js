@@ -14,6 +14,8 @@ export default class Message extends BaseModel {
         data: { type: 'string', minLength: 1, maxLength: 1000 },
         channelId: { type: 'integer' },
         ownerId: { type: 'integer' },
+        createdAt: { type: 'date-time' },
+        updatedAt: { type: 'date-time' },
       },
     };
   }
