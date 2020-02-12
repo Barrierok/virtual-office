@@ -5,39 +5,18 @@ export default class MessagesRepository {
     this.model = models.Message;
   }
 
-  async getMessagesByChannelId(id) {
-    try {
-      const messages = await this.model
-        .query()
-        .where('channelId', id)
-        .orderBy('createdAt');
-      return messages;
-    } catch (e) {
-      console.log(e);
-      throw new Error(e);
-    }
+  getMessagesByChannelId(id) {
+    return this.model
+      .query()
+      .where('channelId', id)
+      .orderBy('createdAt', 'DESC');
   }
 
-  async getAllMessages() {
-    try {
-      const messages = await this.model.query().orderBy('createdAt');
-      return messages;
-    } catch (e) {
-      console.log(e);
-      throw new Error(e);
-    }
+  getAllMessages() {
+    return this.model.query().orderBy('createdAt');
   }
 
-  async insertMessage(data) {
-    try {
-      const message = await this.model
-        .query()
-        .insert(data)
-        .returning('*');
-      return message;
-    } catch (e) {
-      console.log(e);
-      throw new Error(e);
-    }
+  insertMessage(data) {
+    return this.model.query().insert(data).returning('*');
   }
 }
