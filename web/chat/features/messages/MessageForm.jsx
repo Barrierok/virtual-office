@@ -4,7 +4,6 @@ import {
   Button, Form, Row, Col,
 } from 'react-bootstrap';
 
-import UsernameContext from '../../utils/UsernameContext';
 import connect from '../../utils/connect';
 import { addMessage as action } from './messagesSlice';
 
@@ -28,8 +27,6 @@ class MessageForm extends React.PureComponent {
     }
   }
 
-  static contextType = UsernameContext;
-
   render() {
     return (
       <Formik onSubmit={this.handleSubmit} initialValues={{ text: '' }}>
@@ -37,7 +34,7 @@ class MessageForm extends React.PureComponent {
           <Form className="form d-flex justify-content-around w-100" onSubmit={handleSubmit}>
             <Row className="w-100">
               <Col sm={12} md={8} lg={10}>
-                <Field name="text" required disabled={isSubmitting} type="text" className="rounded border w-100 mt-3" />
+                <Field autoFocus name="text" required disabled={isSubmitting} type="text" className="rounded border w-100 mt-3" />
               </Col>
               <Col sm={12} md={4} lg={2}>
                 <Button type="submit" variant="primary" className="w-100 mt-3" disabled={!dirty || isSubmitting}>

@@ -21,7 +21,7 @@ class RenameChannel extends React.PureComponent {
     }
   }
 
-  renderForm = initialValues => (
+  renderForm = (initialValues) => (
     <Formik onSubmit={this.handleSubmit} initialValues={initialValues}>
       {({ dirty, isSubmitting, handleSubmit }) => (
         <Form className="d-flex" onSubmit={handleSubmit}>

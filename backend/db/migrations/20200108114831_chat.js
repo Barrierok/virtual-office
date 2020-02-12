@@ -10,7 +10,7 @@ exports.up = (knex) => (
     })
     .createTable('messages', (table) => {
       table.increments('id').primary();
-      table.string('text');
+      table.string('text', 5000);
       table.string('author');
       table.datetime('created_at');
       table.datetime('updated_at');

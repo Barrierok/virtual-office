@@ -8,10 +8,10 @@ import Header from '../../shared/Header';
 
 const App = () => (
   <>
-    <Header title="Chat" href="/chat" />
+    <Header active="chat" />
     <Container fluid as="main" className="h-100">
       <Row as="article" className="h-100">
-        <Col sl={12} md={2} lg={2} className="border-top m-0 p-0">
+        <Col sl={12} md={2} lg={2} className="m-0 p-0">
           <Channels />
         </Col>
         <Col sl={12} md={10} lg={10} className="m-0 p-0 h-100 w-100 border-top border-left">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { DateTime } from 'luxon';
 
 import connect from '../../utils/connect';
 
@@ -31,12 +32,20 @@ class Chat extends React.PureComponent {
     const { messages } = this.props;
     return (
       <section className="fields">
-        {messages.map((ms) => (
-          <div className="message d-block m-1 p-1 mw-30" key={ms.id}>
-            <h6>{ms.author}</h6>
-            <p className="m-0 p-0">{ms.text}</p>
-          </div>
-        ))}
+        {messages.map((ms) => {
+          const date = DateTime
+            .fromISO(ms.createdAt)
+            .toLocaleString(DateTime.TIME_SIMPLE);
+          return (
+            <div className="message d-block ml-2" key={ms.id}>
+              <div>
+                <strong className="mr-2">{ms.author}</strong>
+                <span>{date}</span>
+              </div>
+              <p>{ms.text}</p>
+            </div>
+          );
+        })}
         <div ref={this.messagesEndRef} />
       </section>
     );
