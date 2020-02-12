@@ -29,7 +29,7 @@ export default () => {
   const knex = Knex(knexConfig.development);
   Model.knex(knex);
 
-  app.keys = [`${process.env.secret}`];
+  app.keys = [process.env.SECRET];
   app.use(session({}, app));
   app.use(bodyParser());
   app.use(views(
