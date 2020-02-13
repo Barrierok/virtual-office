@@ -1,8 +1,8 @@
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
-  entry: [
-    `${__dirname}/web/chat/index.jsx`,
-  ],
+  entry: {
+    chat: [`${__dirname}/web/chat/index.jsx`],
+  },
   externals: {
     gon: 'gon',
   },
@@ -10,6 +10,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
   },
   output: {
+    filename: '[name].bundle.js',
     path: `${__dirname}/dist/public`,
     publicPath: '/assets/',
   },
