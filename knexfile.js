@@ -21,4 +21,16 @@ module.exports = {
     },
     ...knexSnakeCaseMappers(),
   },
+  production: {
+    connection: {
+      database: process.env.DATABASE_URL,
+    },
+    migrations: {
+      directory: path.join(BASE_PATH, 'migrations'),
+    },
+    seeds: {
+      directory: path.join(BASE_PATH, 'seeds'),
+    },
+    ...knexSnakeCaseMappers(),
+  }
 };
