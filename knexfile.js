@@ -22,9 +22,8 @@ module.exports = {
     ...knexSnakeCaseMappers(),
   },
   production: {
-    connection: {
-      database: process.env.DATABASE_URL,
-    },
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
     migrations: {
       directory: path.join(BASE_PATH, 'migrations'),
     },
