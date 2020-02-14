@@ -18,6 +18,6 @@ publish:
 	npm publish
 
 init:
-	make install && knex migrate:latest && knex seed:run
+	make install
 
 .PHONY: test
