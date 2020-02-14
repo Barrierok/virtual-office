@@ -9,7 +9,7 @@
     "build-app": "npx webpack -p --env production",
     "build": "npm run build-app && npm run build-server",
     "postinstall": "npm run build",
-    "start": "node backend/bin/app.js"
+    "start": "node dist/bin/app.js"
   },
   "dependencies": {
     "@babel/cli": "^7.7.7",
@@ -17,9 +17,11 @@
     "@babel/node": "^7.5.5",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-proposal-decorators": "^7.4.4",
+    "@babel/plugin-transform-runtime": "^7.8.3",
     "@babel/polyfill": "^7.4.4",
     "@babel/preset-env": "^7.5.5",
     "@babel/preset-react": "^7.0.0",
+    "@babel/runtime": "^7.8.4",
     "@reduxjs/toolkit": "^1.0.1",
     "axios": "^0.19.0",
     "babel-loader": "^8.0.6",
