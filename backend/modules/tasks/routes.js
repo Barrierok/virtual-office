@@ -44,7 +44,7 @@ export default (router, io) => {
 
   return router
     .get('/tasks', authenticated(), async (ctx) => {
-      const tasks = await tasksService.getChannels();
+      const tasks = await tasksService.getTasks();
       const { username } = ctx.state.user;
       await ctx.render('tasks', {
         gon: {

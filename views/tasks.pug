@@ -1,0 +1,10 @@
+doctype html
+html(lang="ru")
+    head
+        title= Задачи
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+        script.
+          var gon = !{JSON.stringify(gon)};
+    body
+        #tasks
+        script(src='/assets/tasks.bundle.js')
