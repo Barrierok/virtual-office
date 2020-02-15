@@ -1,5 +1,5 @@
 start:
-	npx nodemon --exec babel-node backend/bin/app.js
+	npm run start:dev
 
 build:
 	rm -rf dist
