@@ -7,7 +7,7 @@ export default class Tasks extends Model {
   }
 
   $beforeInsert() {
-    this.created_at = new Date().toISOString();
+    this.createdAt = new Date().toISOString();
   }
 
   static relationMappings = {

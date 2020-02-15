@@ -4,7 +4,6 @@ exports.up = (knex) => (
       table.increments('id').primary();
       table.string('title').unique();
       table.string('description');
-      table.integer('owner_id').references('users.id');
       table.datetime('created_at');
       table.datetime('updated_at');
       table

@@ -5,6 +5,5 @@ exports.seed = (knex) => knex('tasks').del()
       description: 'My awesome description',
       parent_id: null,
       created_at: new Date().toISOString(),
-      ownerId: 1,
     },
   ])));
