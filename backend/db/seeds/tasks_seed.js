@@ -3,7 +3,7 @@ exports.seed = (knex) => knex('tasks').del()
     {
       title: 'My awesome task',
       description: 'My awesome description',
-      parentId: null,
+      parent_id: null,
       created_at: new Date().toISOString(),
     },
   ])));
