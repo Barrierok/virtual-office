@@ -8,11 +8,11 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import UsernameContext from '../shared/UsernameContext';
 
-const { username } = gon;
+const { username, tasks } = gon;
 
 ReactDOM.render(
   <UsernameContext.Provider value={username}>
-    <App />
+    <App tasks={tasks} />
   </UsernameContext.Provider>,
   document.getElementById('tasks'),
 );
