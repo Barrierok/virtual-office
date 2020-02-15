@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import UsernameContext from '../chat/utils/UsernameContext';
+import UsernameContext from './UsernameContext';
 
 export default class Header extends React.PureComponent {
   static contextType = UsernameContext;
