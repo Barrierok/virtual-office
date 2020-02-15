@@ -9,15 +9,15 @@ export default class Header extends React.PureComponent {
     const { active } = this.props;
     return (
       <Navbar bg="primary" variant="dark">
-        <Navbar.Brand href="/">Brand</Navbar.Brand>
+        <Navbar.Brand href="/">Лого</Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link disabled={active === 'manager'} href="/task">Manager</Nav.Link>
-          <Nav.Link disabled={active === 'chat'} href="/chat">Chat</Nav.Link>
-          <Nav.Link disabled={active === 'news'} href="/news">News</Nav.Link>
+          <Nav.Link disabled={active === 'tasks'} href="/tasks">Задачи</Nav.Link>
+          <Nav.Link disabled={active === 'chat'} href="/chat">Чат</Nav.Link>
+          <Nav.Link disabled={active === 'news'} href="/news">Новости</Nav.Link>
         </Nav>
         <Nav>
           <NavDropdown alignRight title={this.context}>
-            <NavDropdown.Item href="/logout">Logout</NavDropdown.Item>
+            <NavDropdown.Item href="/logout">Выйти</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </Navbar>
