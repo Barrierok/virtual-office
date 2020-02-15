@@ -1,5 +1,5 @@
 start:
-	env NODE_ENV=development npx nodemon --exec npx babel-node backend/bin/app.js
+	npm run start:dev
 
 build:
 	rm -rf dist

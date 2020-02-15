@@ -1,6 +1,8 @@
 # diploma
 
-Чтобы заработал проект нужно сделать несколько вещей:
+Можно потестить: [Чат](https://hhdiploma.herokuapp.com/chat)
+
+Чтобы заработал проект для разработки нужно сделать несколько вещей:
 
 1. Создать пользователя с паролем в PostgreSQL.
 2. Создать базу данных hhapp и дать новому пользователю права в ней (см. [Создание пользователя и БД](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e))
