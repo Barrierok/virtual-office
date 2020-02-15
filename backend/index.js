@@ -19,6 +19,7 @@ import knexConfig from '../knexfile';
 import addChatRoutes from './modules/chat/routes';
 import addNewsRoutes from './modules/news/routes';
 import addUserRoutes from './modules/auth/routes';
+import addTasksRoutes from './modules/tasks/routes';
 import webpackConfig from '../webpack.config';
 import './modules/auth/utils/configuratePassport';
 
@@ -61,6 +62,7 @@ export default () => {
   addUserRoutes(router);
   addNewsRoutes(router, io);
   addChatRoutes(router, io);
+  addTasksRoutes(router, io);
   app.use(router.allowedMethods());
   app.use(router.routes());
 
