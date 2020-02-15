@@ -11,17 +11,16 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
   try {
     const user = await userService.getById(id);
-    done(null, user);
+    done(null, user === undefined ? false : user);
   } catch (err) {
     done(err);
   }
 });
 
 passport.use(new LocalStrategy((username, password, done) => {
-  console.log(username, password);
   userService.getByUsername(username)
     .then((user) => {
-      if (username === user.username && password === user.password) {
+      if (user && username === user.username && password === user.password) {
         done(null, user);
       } else {
         done(null, false);
