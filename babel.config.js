@@ -11,5 +11,6 @@ module.exports = {
         regenerator: true,
       },
     ],
+    ['@babel/plugin-proposal-optional-chaining'],
   ],
 };

@@ -23,9 +23,11 @@ export default class Header extends React.PureComponent {
           <Nav.Link disabled={active === 'news'} href="/news">Новости</Nav.Link>
         </Nav>
         <Nav>
-          <NavDropdown alignRight title={this.context}>
-            <NavDropdown.Item href="/logout">Выйти</NavDropdown.Item>
-          </NavDropdown>
+          {this.context && (
+            <NavDropdown alignRight title={this.context}>
+              <NavDropdown.Item href="/logout">Выйти</NavDropdown.Item>
+            </NavDropdown>
+          )}
         </Nav>
       </Navbar>
     );

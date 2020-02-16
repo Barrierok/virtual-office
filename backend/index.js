@@ -67,7 +67,12 @@ export default () => {
   app.use(router.routes());
 
   router.get('/', async (ctx) => {
-    await ctx.render('landing');
+    const username = ctx.state?.user?.username;
+    await ctx.render('landing', {
+      gon: {
+        username,
+      },
+    });
   });
 
   return server;
