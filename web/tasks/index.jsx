@@ -4,6 +4,7 @@ import '../../assets/application.css';
 import gon from 'gon';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import 'moment/locale/ru';
 
 import App from './App';
 import UsernameContext from '../shared/UsernameContext';
