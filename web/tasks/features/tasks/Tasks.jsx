@@ -4,7 +4,15 @@ import TasksItem from './TasksItem';
 function Tasks(props) {
   const { tasks } = props;
 
-  return tasks.map((i) => <TasksItem task={i} key={`task-list-item-${i.id}`} />);
+  return (
+    <main id="tasks-grid">
+      {tasks.map((i) => (
+        <div key={`task-grid-item-${i.id}`} className="tasks-grid-item">
+          <TasksItem task={i} />
+        </div>
+      ))}
+    </main>
+  );
 }
 
 export default Tasks;
