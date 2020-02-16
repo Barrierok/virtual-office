@@ -66,5 +66,9 @@ export default () => {
   app.use(router.allowedMethods());
   app.use(router.routes());
 
+  router.get('/', async (ctx) => {
+    await ctx.render('landing');
+  });
+
   return server;
 };

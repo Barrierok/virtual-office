@@ -3,6 +3,7 @@ module.exports = {
   entry: {
     chat: [`${__dirname}/web/chat/index.jsx`],
     tasks: [`${__dirname}/web/tasks/index.jsx`],
+    landing: [`${__dirname}/web/landing/index.jsx`],
   },
   externals: {
     gon: 'gon',
