@@ -1,10 +1,18 @@
+import _ from 'lodash';
 import repositories from '../repositories';
+import services from '../../auth/services';
+
+const setUser = async (task) => {
+  const usersService = new services.UsersService();
+  const { username: author } = await usersService.getById(task.ownerId);
+  return _.omit({ ...task, author }, 'ownerId');
+};
 
 const createResult = (task) => ({
   data: {
     type: 'tasks',
     id: task.id,
-    attributes: task,
+    attributes: setUser(task),
   },
 });
 
@@ -14,8 +22,11 @@ export default class TasksService {
   }
 
   async getTasks() {
-    const result = await this.tasksRepository.getTasks();
-    return result;
+    const tasks = await this.tasksRepository.getTasks();
+    return Promise.all(tasks.map((t) => {
+      if (!t.ownerId) return t;
+      return setUser(t);
+    }));
   }
 
   async insertTask(data) {
