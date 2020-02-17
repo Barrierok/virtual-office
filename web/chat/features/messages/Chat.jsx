@@ -1,6 +1,5 @@
 import React from 'react';
-import moment from 'moment';
-import 'moment/locale/ru';
+import { DateTime } from 'luxon';
 
 import connect from '../../utils/connect';
 
@@ -27,14 +26,16 @@ class Chat extends React.PureComponent {
 
   scrollToBottom = () => {
     this.messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
-  };
+  }
 
   render() {
     const { messages } = this.props;
     return (
       <section className="fields">
         {messages.map((ms) => {
-          const date = moment(ms.createdAt).calendar();
+          const date = DateTime
+            .fromISO(ms.createdAt)
+            .toLocaleString(DateTime.TIME_SIMPLE);
           return (
             <div className="message d-block ml-2" key={ms.id}>
               <div>

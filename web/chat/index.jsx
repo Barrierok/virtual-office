@@ -11,7 +11,7 @@ import io from 'socket.io-client';
 
 import App from './app/App.jsx';
 import reducers from './reducers';
-import UsernameContext from '../shared/UsernameContext';
+import UsernameContext from './utils/UsernameContext';
 import { initMessages, addMessageSuccess } from './features/messages/messagesSlice';
 import {
   initChannels, addChannelSuccess, removeChannelSuccess, renameChannelSuccess,

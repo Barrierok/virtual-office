@@ -1,9 +1,0 @@
-#tasks-grid {
-    overflow: hidden;
-    overflow-x: scroll;
-    white-space:nowrap;
-}
-
-.tasks-grid-item {
-    display: inline-block;
-}

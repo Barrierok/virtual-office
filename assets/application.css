@@ -1,5 +1,3 @@
-@import "tasks-grid.css";
-
 html {
   font-size: 18px;
 }
@@ -33,8 +31,4 @@ body {
 
 strong {
   font-size: large;
-}
-
-#logo {
-  transform: scale(1.4);
 }

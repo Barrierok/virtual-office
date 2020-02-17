@@ -2,8 +2,6 @@ module.exports = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
     chat: [`${__dirname}/web/chat/index.jsx`],
-    tasks: [`${__dirname}/web/tasks/index.jsx`],
-    landing: [`${__dirname}/web/landing/index.jsx`],
   },
   externals: {
     gon: 'gon',
@@ -26,11 +24,6 @@ module.exports = {
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|jpe?g|gif)$/i,
-        exclude: /node_modules/,
-        use: 'file-loader',
       },
     ],
   },
