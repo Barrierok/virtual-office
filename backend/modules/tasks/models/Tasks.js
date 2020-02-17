@@ -1,13 +1,10 @@
 import { Model } from 'objection';
+import BaseModel from '../../../lib/BaseModel';
 import User from '../../auth/models/User';
 
-export default class Tasks extends Model {
+export default class Tasks extends BaseModel {
   static get tableName() {
     return 'tasks';
-  }
-
-  $beforeInsert() {
-    this.createdAt = new Date().toISOString();
   }
 
   static relationMappings = {
