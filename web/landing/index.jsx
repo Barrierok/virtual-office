@@ -17,6 +17,9 @@ const theme = createMuiTheme({
       main: '#007bff',
     },
   },
+  typography: {
+    fontSize: '1rem',
+  },
 });
 
 const { username } = gon;
