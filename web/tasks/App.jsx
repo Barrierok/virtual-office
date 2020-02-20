@@ -10,7 +10,7 @@ function App(props) {
 
   return (
     <>
-      <Header active="tasks" bg="dark" />
+      <Header active="tasks" bg="primary" />
       <Container fluid as="main" className="h-100">
         <Row as="article" className="h-100">
           <Col sl={12} md={2} lg={2} className="m-0 p-0">
