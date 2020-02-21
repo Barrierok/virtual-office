@@ -28,7 +28,7 @@ const isDevelopment = !isProduction;
 
 export default () => {
   const app = new Koa();
-  const knex = Knex(knexConfig[process.env.NODE_ENV]);
+  const knex = Knex(knexConfig);
   Model.knex(knex);
 
   app.keys = [process.env.SECRET];
