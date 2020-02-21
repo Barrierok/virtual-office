@@ -3,31 +3,20 @@ name: Node.js CI
 on: [pull_request]
 
 jobs:
-  runner-job:
+  container-job:
     runs-on: ubuntu-latest
+    container: node:10.18-jessie
 
     services:
       postgres:
         image: postgres
-        ports:
-          - 5432:5432
-
-    strategy:
-      matrix:
-        node-version: [13.x]
 
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies and build
-        run: |
-          npm ci
-          npm run build --if-present
+        run: npm ci
         env:
           CI: true
           HOST: ${{ secrets.HOST }}
