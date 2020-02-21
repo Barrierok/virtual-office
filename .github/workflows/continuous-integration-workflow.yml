@@ -12,31 +12,31 @@ jobs:
         ports:
           - 5432:5432
 
-      strategy:
-        matrix:
-          node-version: [13.x]
+    strategy:
+      matrix:
+        node-version: [13.x]
 
-      steps:
-        - name: Check out repository code
-          uses: actions/checkout@v2
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v1
-          with:
-            node-version: ${{ matrix.node-version }}
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
-        - name: Install dependencies and build
-          run: |
-            npm ci
-            npm run build --if-present
-          env:
-            CI: true
-            HOST: ${{ secrets.HOST }}
-            DB_PORT: ${{ secrets.DB_PORT }}
-            DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-            DB_USER: ${{ secrets.DB_USER }}
-            SECRET: ${{ secrets.SECRET }}
-            PORT: ${{ secrets.PORT }}
-            DB: ${{ secrets.DB }}
+      - name: Install dependencies and build
+        run: |
+          npm ci
+          npm run build --if-present
+        env:
+          CI: true
+          HOST: ${{ secrets.HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          DB_USER: ${{ secrets.DB_USER }}
+          SECRET: ${{ secrets.SECRET }}
+          PORT: ${{ secrets.PORT }}
+          DB: ${{ secrets.DB }}
 
-        - name: run linter
-          run: npm run lint
+      - name: run linter
+        run: npm run lint
