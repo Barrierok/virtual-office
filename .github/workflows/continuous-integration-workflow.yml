@@ -18,7 +18,6 @@ jobs:
       - name: Install dependencies and build
         run: npm ci
         env:
-          CI: true
           HOST: ${{ secrets.HOST }}
           DB_PORT: ${{ secrets.DB_PORT }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
