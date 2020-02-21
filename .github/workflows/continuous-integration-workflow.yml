@@ -3,14 +3,14 @@ name: Node.js CI
 on: [pull_request]
 
 jobs:
-  container-job:
-      runs-on: ubuntu-latest
+  runner-job:
+    runs-on: ubuntu-latest
 
-      container: node:10.18-jessie
-
-      services:
-        postgres:
-          image: postgres
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
 
       strategy:
         matrix:
