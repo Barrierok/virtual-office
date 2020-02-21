@@ -11,6 +11,8 @@ const {
 
 const connection = `postgres://${DB_USER}:${DB_PASSWORD}@${HOST}:${DB_PORT}/${DB}`;
 
+console.log(connection);
+
 module.exports = {
   client: 'pg',
   connection: process.env.DATABASE_URL || connection,
