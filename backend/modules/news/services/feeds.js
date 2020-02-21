@@ -1,6 +1,6 @@
 import repositoreis from '../repositories';
 
-const createResult = feed => ({
+const createResult = (feed) => ({
   data: {
     type: 'feeds',
     id: feed.id,

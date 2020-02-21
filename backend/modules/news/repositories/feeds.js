@@ -10,7 +10,6 @@ export default class FeedsRepository {
       const feeds = await this.model.query();
       return feeds;
     } catch (e) {
-      console.log(e);
       throw new Error(e);
     }
   }
@@ -23,7 +22,6 @@ export default class FeedsRepository {
         .returning('*');
       return feed;
     } catch (e) {
-      console.log(e);
       throw new Error(e);
     }
   }
@@ -37,7 +35,6 @@ export default class FeedsRepository {
         .returning('*');
       return feed;
     } catch (e) {
-      console.log(e);
       throw new Error(e);
     }
   }
@@ -51,7 +48,6 @@ export default class FeedsRepository {
         .returning('*');
       return feed;
     } catch (e) {
-      console.log(e);
       throw new Error(e);
     }
   }
