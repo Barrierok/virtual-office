@@ -1,8 +1,5 @@
 # diploma
 
-![Github](https://github.com/Barrierok/diploma/workflows/continuous-integration-workflow.yml/badge.svg) [![Maintainability](https://api.codeclimate.com/v1/badges/acd3800709a40dd679e6/maintainability)](https://codeclimate.com/github/Barrierok/diploma/maintainability) ![Heroku](http://heroku-badge.herokuapp.com/?app=hhdiploma)
-
-
 Можно потестить: [Чат](https://hhdiploma.herokuapp.com/chat)
 
 Чтобы заработал проект для разработки нужно сделать несколько вещей:

@@ -1,5 +1,5 @@
 
-exports.up = (knex) => (
+exports.up = knex => (
   knex.schema
     .createTable('feeds', (table) => {
       table.increments('id').primary();
@@ -11,7 +11,7 @@ exports.up = (knex) => (
     })
 );
 
-exports.down = (knex) => (
+exports.down = knex => (
   knex.schema
     .dropTableIfExists('feeds')
 );
