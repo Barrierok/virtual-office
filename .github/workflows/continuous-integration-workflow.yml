@@ -18,13 +18,13 @@ jobs:
       - name: Install dependencies and build
         run: npm ci
         env:
-          HOST: ${{ secrets.HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
-          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-          DB_USER: ${{ secrets.DB_USER }}
+          HOST: localhost
+          DB_PORT: 5432
+          DB_PASSWORD: postgres
+          DB_USER: postgres
           SECRET: ${{ secrets.SECRET }}
-          PORT: ${{ secrets.PORT }}
-          DB: ${{ secrets.DB }}
+          PORT: 3000
+          DB: postgres
 
       - name: run linter
         run: npm run lint
