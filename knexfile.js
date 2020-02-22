@@ -15,7 +15,7 @@ const connection = {
 
 module.exports = {
   client: 'pg',
-  connection: process.env.DATABASE_URL || connection,
+  connection,
   migrations: {
     directory: path.join(BASE_PATH, 'migrations'),
   },
