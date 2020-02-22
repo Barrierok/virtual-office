@@ -1,6 +1,6 @@
 name: Testing build and health code
 
-on: [pull-request]
+on: [pull_request]
 
 jobs:
   build:
