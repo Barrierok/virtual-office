@@ -14,13 +14,30 @@ const connection = {
 };
 
 module.exports = {
-  client: 'pg',
-  connection: process.env.DATABASE_URL || connection,
-  migrations: {
-    directory: path.join(BASE_PATH, 'migrations'),
+  development: {
+    client: 'pg',
+    connection: {
+      database: process.env.DB,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+    },
+    migrations: {
+      directory: path.join(BASE_PATH, 'migrations'),
+    },
+    seeds: {
+      directory: path.join(BASE_PATH, 'seeds'),
+    },
+    ...knexSnakeCaseMappers(),
   },
-  seeds: {
-    directory: path.join(BASE_PATH, 'seeds'),
-  },
-  ...knexSnakeCaseMappers(),
+  production: {
+    client: 'pg',
+    connection: process.env.DATABASE_URL,
+    migrations: {
+      directory: path.join(BASE_PATH, 'migrations'),
+    },
+    seeds: {
+      directory: path.join(BASE_PATH, 'seeds'),
+    },
+    ...knexSnakeCaseMappers(),
+  }
 };

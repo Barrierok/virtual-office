@@ -100,20 +100,11 @@ export default function App() {
         <section className={classes.heroContent}>
           <Container maxWidth="sm">
             <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-              Иновационный продукт
+              Виртуальный офис
             </Typography>
             <Typography variant="h5" align="center" color="textSecondary" paragraph>
-              Информационная система для автоматизации деятельности компаний-рекрументеров
+              Информационная система для автоматизации деятельности
             </Typography>
-            {/* <div className={classes.heroButtons}> */}
-            {/*  <Grid container spacing={2} justify="center"> */}
-            {/*    <Grid item> */}
-            {/*      <Button variant="contained" color="primary"> */}
-            {/*        Узнать подробнее */}
-            {/*      </Button> */}
-            {/*    </Grid> */}
-            {/*  </Grid> */}
-            {/* </div> */}
           </Container>
         </section>
         <Container className={classes.cardGrid} maxWidth="md">

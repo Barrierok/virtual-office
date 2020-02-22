@@ -14,6 +14,7 @@ export default (router, io) => {
     .post('/channels', authenticated(), async (ctx) => {
       const { data: { attributes: { name } } } = ctx.request.body;
       const { user } = ctx.state;
+      console.log(user);
       const channel = {
         name,
         removable: true,

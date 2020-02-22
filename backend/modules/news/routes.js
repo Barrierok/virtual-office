@@ -40,6 +40,7 @@ export default (router, io) => {
 
   return router
     .get('root', '/news', async (ctx) => {
+      console.log(__dirname);
       await ctx.render('index', {
         gon: {
           feeds: await feedsService.getFeeds(),
