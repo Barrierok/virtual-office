@@ -6,11 +6,11 @@ require('dotenv').config({ path: `${__dirname}/.env` });
 const BASE_PATH = path.join(__dirname, 'backend', 'db');
 
 const connection = {
-  host: process.env.HOST,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB,
-  port: process.env.DB_PORT,
+  host: 'localhost',
+  user: 'postgres',
+  password: 'postgres',
+  database: 'postgres',
+  port: '5432',
 };
 
 module.exports = {
