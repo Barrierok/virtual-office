@@ -9,12 +9,12 @@ jobs:
     services:
       postgres:
         image: postgres
-        ports:
-          - 5432:5432
         env:
           DB: postgres
           DB_PASSWORD: postgres
           DB_USER: postgres
+        ports:
+          - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     strategy:
@@ -31,8 +31,10 @@ jobs:
         env:
           CI: true
           DB: postgres
+          HOST: postgres
           DB_PASSWORD: postgres
           DB_USER: postgres
           SECRET: secret
+          DB_PORT: ${{ job.services.postgres.ports['5432'] }}
   
 
