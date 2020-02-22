@@ -5,13 +5,13 @@ require('dotenv').config({ path: `${__dirname}/.env` });
 
 const BASE_PATH = path.join(__dirname, 'backend', 'db');
 
-const {
-  DB_USER, DB_PASSWORD, HOST, DB_PORT, DB,
-} = process.env;
-
-const connection = `postgres://${DB_USER}:${DB_PASSWORD}@${HOST}:${DB_PORT}/${DB}`;
-
-console.log(connection);
+const connection = {
+  host: process.env.HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB,
+  port: process.env.DB_PORT,
+};
 
 module.exports = {
   client: 'pg',
