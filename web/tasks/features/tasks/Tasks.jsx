@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Column from './Column/Column';
 
 function Tasks(props) {
-  const { tasks } = props;
+  const { columns } = props;
 
   const handleScroll = (e) => {
     const container = document.getElementById('board');
@@ -15,13 +16,17 @@ function Tasks(props) {
 
   return (
     <main id="board" onWheel={handleScroll} className="h-100">
-      {tasks.map((i) => (
-        <div key={`task-grid-item-${i.id}`} className="tasks-grid-item">
-          <Column task={i} />
+      {columns.map((i) => (
+        <div key={`column-${i.id}`} className="board-item">
+          <Column column={i} />
         </div>
       ))}
     </main>
   );
 }
 
-export default Tasks;
+const mapStateToProps = (state) => ({
+  columns: state.columns.data,
+});
+
+export default connect(mapStateToProps)(Tasks);

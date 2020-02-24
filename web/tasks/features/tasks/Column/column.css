@@ -8,6 +8,10 @@
     white-space: nowrap;
 }
 
+.column-cnt:first-child {
+    margin-left: 10px;
+}
+
 .column-content {
     background-color: #ebecf0;
     border-radius: 3px;
