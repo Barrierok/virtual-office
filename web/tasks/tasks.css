@@ -1,0 +1,28 @@
+#tasks {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    font-size: 14px;
+    background-image: url("https://trello-backgrounds.s3.amazonaws.com/SharedBackground/original/5fa127d51765563a44711a928d99b199/photo-1581610186406-5f6e9f9edbc1");
+    background-size: 100% 100%;
+    overflow: hidden;
+}
+
+#board {
+    overflow-x: scroll;
+    white-space:nowrap;
+}
+
+.tasks-grid-item {
+    display: inline-block;
+}
+
+.full-screen {
+    position: fixed;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+}

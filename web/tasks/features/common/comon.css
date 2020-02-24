@@ -1,0 +1,12 @@
+.app-feature-item {
+    background-color: hsla(0, 0%, 100%, .24);
+    color: white;
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+}
+
+.app-feature-item:hover {
+    cursor: pointer;
+    background-color: hsla(0, 0%, 100%, .34);
+}
