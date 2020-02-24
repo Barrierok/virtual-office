@@ -7,12 +7,6 @@ exports.up = (knex) => (
       table.string('status');
       table.datetime('created_at');
       table.datetime('updated_at');
-      table
-        .integer('parent_id')
-        .unsigned()
-        .references('tasks.id')
-        .onDelete('CASCADE')
-        .index();
     })
 );
 

@@ -1,12 +1,12 @@
 import React from 'react';
-import TasksItem from './TasksItem';
+import Column from './Column/Column';
 
 function Tasks(props) {
   const { tasks } = props;
 
   const handleScroll = (e) => {
     const container = document.getElementById('board');
-    const containerScrollPosition = document.getElementById('board').scrollLeft;
+    const containerScrollPosition = container.scrollLeft;
     container.scrollTo({
       top: 0,
       left: containerScrollPosition + e.deltaY,
@@ -17,7 +17,7 @@ function Tasks(props) {
     <main id="board" onWheel={handleScroll} className="h-100">
       {tasks.map((i) => (
         <div key={`task-grid-item-${i.id}`} className="tasks-grid-item">
-          <TasksItem task={i} />
+          <Column task={i} />
         </div>
       ))}
     </main>

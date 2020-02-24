@@ -9,7 +9,8 @@ import 'moment/locale/ru';
 import App from './App';
 import UsernameContext from '../shared/UsernameContext';
 
-const { username, tasks } = gon;
+const { username, tasks, columns } = gon;
+console.log(gon);
 
 ReactDOM.render(
   <UsernameContext.Provider value={username}>

@@ -4,52 +4,46 @@ import authenticated from '../auth/utils';
 
 export default (router, io) => {
   const tasksService = new services.TasksService();
+  const columnsService = new services.ColumnsService();
   const apiRouter = new Router();
 
   apiRouter
-    .get('/tasks', authenticated(), async (ctx) => {
-      ctx.body = await tasksService.getTasks();
+    .get('/columns', authenticated(), async (ctx) => {
+      ctx.body = await columnsService.getColumns();
     })
-    .post('/tasks', authenticated(), async (ctx) => {
+    .post('/columns', authenticated(), async (ctx) => {
       const { data: { attributes } } = ctx.request.body;
-      const { title, description, parentId } = attributes;
-      const { user } = ctx.state;
-      const task = {
+      const { title } = attributes;
+      const column = {
         title,
-        description,
-        parentId: Number(parentId),
-        ownerId: user.id,
       };
-      const data = await tasksService.insertTask(task);
+      const data = await columnsService.insertColumn(column);
 
       ctx.status = 201;
       ctx.body = data;
-      io.emit('newTask', data);
+      io.emit('newColumn', data);
     })
-    .delete('/tasks/:id', authenticated(), async (ctx) => {
+    .delete('/column/:id', authenticated(), async (ctx) => {
       const id = Number(ctx.params.id);
-      const data = await tasksService.deleteTask(id);
+      const data = await columnsService.deleteColumn(id);
 
       ctx.status = 204;
-      io.emit('removeTask', data);
+      io.emit('removeColumn', data);
     })
-    .patch('/tasks/:id', async (ctx) => {
-      const feedId = Number(ctx.params.id);
-      const { attributes } = ctx.request.body.data;
-      const data = await tasksService.updateTask(feedId, attributes);
-
-      ctx.status = 204;
-      io.emit('updateTask', data);
+    .get('columns/tasks', authenticated(), async (ctx) => {
+      ctx.body = await tasksService.getAllTasks();
     });
 
   return router
     .get('/tasks', authenticated(), async (ctx) => {
-      const tasks = await tasksService.getTasks();
+      const columns = await columnsService.getColumns();
+      const tasks = await tasksService.getAllTasks();
       const { username } = ctx.state.user;
       await ctx.render('tasks', {
         gon: {
           username,
           tasks,
+          columns,
         },
       });
     })

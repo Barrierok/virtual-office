@@ -1,26 +1,19 @@
 import models from '../models';
 
-export default class TasksRepository {
+export default class ColumnsRepository {
   constructor() {
-    this.model = models.Tasks;
+    this.model = models.Columns;
   }
 
-  getAllTasks() {
+  getColumns() {
     return this.model.query().orderBy('createdAt');
   }
 
-  getTasksByColumnId(id) {
-    return this.model
-      .query()
-      .where('columnId', id)
-      .orderBy('createdAt', 'DESC');
-  }
-
-  insertTask(data) {
+  insertColumn(data) {
     return this.model.query().insert(data).returning('*');
   }
 
-  updateTask(id, newData) {
+  updateColumn(id, newData) {
     return this.model
       .query()
       .findById(id)
@@ -28,7 +21,7 @@ export default class TasksRepository {
       .returning('*');
   }
 
-  deleteTask(id) {
+  deleteColumns(id) {
     return this.model.query().deleteById(id).returning('*');
   }
 }
