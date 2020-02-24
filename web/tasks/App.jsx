@@ -3,7 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import './tasks.css';
 
 import Header from '../shared/Header';
-import Tasks from './features/tasks/Tasks';
+import Tasks from './features/board/Board';
 import AppBar from './features/appBar/AppBar';
 
 function App(props) {

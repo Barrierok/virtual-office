@@ -1,5 +1,5 @@
 import tasks from './tasksSlice';
-import columns from './columnsSlice';
+import columns from '../features/columns/columnsSlice';
 
 export default {
   tasks,

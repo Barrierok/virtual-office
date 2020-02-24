@@ -9,12 +9,13 @@
 }
 
 .column-cnt:first-child {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 .column-content {
-    background-color: #ebecf0;
-    border-radius: 3px;
+    background-color: #dddeee;
+    border-radius: 5px;
+    padding: 5px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

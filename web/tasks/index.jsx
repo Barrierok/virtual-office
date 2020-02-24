@@ -13,6 +13,7 @@ import App from './App';
 import UsernameContext from '../shared/UsernameContext';
 import { socketEvents } from './utils/constants';
 import reducer from './store';
+import { addColumn } from './features/columns/columnsSlice';
 
 const { username, tasks, columns } = gon;
 
@@ -35,7 +36,7 @@ const store = configureStore({
 
 io()
   .on(socketEvents.newColumn, ({ data }) => {
-    console.log(data);
+    store.dispatch(addColumn({ data: data.attributes }));
   });
 
 

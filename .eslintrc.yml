@@ -16,3 +16,4 @@ rules:
   react/jsx-props-no-spreading: 0
   no-console: 0
   no-param-reassign: 0
+  jsx-a11y/no-autofocus: 0
