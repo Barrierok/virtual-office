@@ -21,10 +21,10 @@ exports.up = (knex) => (
 
 exports.down = (knex) => (
   knex.schema
-    .table('channels', (table) => {
+    .table('feeds', (table) => {
       table.dropColumn('owner_id');
     })
-    .table('messages', (table) => {
+    .table('collections', (table) => {
       table.dropColumn('owner_id');
     })
 );
