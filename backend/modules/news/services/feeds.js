@@ -1,10 +1,18 @@
+import _ from 'lodash';
 import repositoreis from '../repositories';
+import services from '../../auth/services';
 
-const createResult = (feed) => ({
+const setUser = async (feed) => {
+  const usersService = new services.UsersService();
+  const { username: author } = await usersService.getById(feed.ownerId);
+  return _.omit({ ...feed, author }, 'ownerId');
+};
+
+const createResult = async (feed) => ({
   data: {
     type: 'feeds',
     id: feed.id,
-    attributes: feed,
+    attributes: await setUser(feed),
   },
 });
 
@@ -13,23 +21,28 @@ export default class FeedService {
     this.feedsRepository = new repositoreis.FeedsRepository();
   }
 
-  async getFeeds() {
-    const result = await this.feedsRepository.getFeeds();
-    return result;
+  async geAllFeeds() {
+    const feeds = await this.feedsRepository.getAllFeeds();
+    return Promise.all(feeds.map((f) => setUser(f)));
+  }
+
+  async getMessagesByCollectionId(collectionId) {
+    const feeds = await this.feedsRepository.getFeedsByCollectionId(collectionId);
+    return Promise.all(feeds.map((f) => createResult(f)));
   }
 
   async insertFeed(data) {
-    const insertedFeed = await this.feedsRepository.insertFeed(data);
-    return createResult(insertedFeed);
+    const feed = await this.feedsRepository.insertFeed(data);
+    return createResult(feed);
   }
 
   async updateFeed(id, newData) {
-    const updatedFeed = await this.feedsRepository.updateFeed(id, newData);
-    return createResult(updatedFeed);
+    const feed = await this.feedsRepository.updateFeed(id, newData);
+    return createResult(feed);
   }
 
   async deleteFeed(id) {
-    const deletedFeed = await this.feedsRepository.deleteFeed(id);
-    return createResult(deletedFeed);
+    const feed = await this.feedsRepository.deleteFeed(id);
+    return createResult(feed);
   }
 }
