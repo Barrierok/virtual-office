@@ -5,50 +5,26 @@ export default class FeedsRepository {
     this.model = models.Feed;
   }
 
-  async getFeeds() {
-    try {
-      const feeds = await this.model.query();
-      return feeds;
-    } catch (e) {
-      throw new Error(e);
-    }
+  getFeedsByCollectionId(id) {
+    return this.model
+      .query()
+      .where('collectionId', id)
+      .orderBy('createdAt', 'DESC');
+  }
+
+  async getAllFeeds() {
+    return this.model.query().orderBy('createdAt');
   }
 
   async insertFeed(data) {
-    try {
-      const feed = await this.model
-        .query()
-        .insert(data)
-        .returning('*');
-      return feed;
-    } catch (e) {
-      throw new Error(e);
-    }
+    return this.model.query().insert(data).returning('*');
   }
 
   async updateFeed(id, newData) {
-    try {
-      const feed = await this.model
-        .query()
-        .findById(id)
-        .patch(newData)
-        .returning('*');
-      return feed;
-    } catch (e) {
-      throw new Error(e);
-    }
+    return this.model.query().findBy(id).patch(newData).returning('*');
   }
 
   async deleteFeed(id) {
-    try {
-      const feed = await this.model
-        .query()
-        .findById(id)
-        .delete()
-        .returning('*');
-      return feed;
-    } catch (e) {
-      throw new Error(e);
-    }
+    return this.model.query().findBy(id).delete().returning('*');
   }
 }
