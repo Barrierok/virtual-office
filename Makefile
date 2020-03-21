@@ -1,5 +1,8 @@
-start:
+dev:
 	npm run start:dev
+
+start:
+	npm run start
 
 build:
 	rm -rf dist
@@ -19,5 +22,8 @@ publish:
 
 init:
 	make install
+
+migrate:
+	npm run migrate
 
 .PHONY: test
