@@ -1,6 +1,9 @@
-export const addChannelActionName = 'addChannel';
-export const removeChannelActionName = 'removeChannel';
-export const renameChannelActionName = 'renameChannel';
-export const addMessageActionName = 'addMessage';
+export const events = {
+  newMessage: 'newMessage',
+  newChannel: 'newChannel',
+  removeChannel: 'removeChannel',
+  renameChannel: 'renameChannel',
+};
+
 export const removeChannelType = 'removeChannelType';
 export const renameChannelType = 'renameChannelType';
