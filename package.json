@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build-server": "babel backend --out-dir dist --source-maps inline",
     "build-app": "npx webpack -p --env production",
-    "migtate": "knex migrate:latest --env production && knex seed:run",
+    "migrate": "knex migrate:latest --env production && knex seed:run",
     "build": "npm run build-app && npm run build-server && npm run migrate",
     "start": "node dist/bin/app.js",
     "start:dev": "env NODE_ENV=development npx nodemon --exec npx babel-node backend/bin/app.js",
