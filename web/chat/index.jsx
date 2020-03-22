@@ -1,53 +1,35 @@
 import '@babel/polyfill';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../../assets/application.css';
+
 import gon from 'gon';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { configureStore } from '@reduxjs/toolkit';
-import thunk from 'redux-thunk';
 import io from 'socket.io-client';
 
 import App from './app/App.jsx';
-import reducers from './reducers';
 import UsernameContext from '../shared/UsernameContext';
-import { initMessages, addMessageSuccess } from './features/messages/messagesSlice';
-import {
-  initChannels, addChannelSuccess, removeChannelSuccess, renameChannelSuccess,
-} from './features/channels/channelsSlice';
-import {
-  addChannelActionName, removeChannelActionName, renameChannelActionName, addMessageActionName,
-} from './utils/constants';
+import { addMessage } from './features/messages/messagesSlice';
+import { addChannel, removeChannel, renameChannel } from './features/channels/channelsSlice';
+import { events } from './utils/constants';
+import store from './app/store';
 
 const { username } = gon;
 
-const store = configureStore({
-  reducer: reducers,
-  middleware: [thunk],
-});
-
-const initValues = ({ channels, currentChannelId, messages }) => {
-  store.dispatch(initChannels({ channels, currentChannelId }));
-  store.dispatch(initMessages({ messages }));
-};
-initValues(gon);
-
-const mappingListener = (event, serverData) => {
-  const mapping = {
-    [addMessageActionName]: (data) => addMessageSuccess({ message: data }),
-    [addChannelActionName]: (data) => addChannelSuccess({ channel: data }),
-    [removeChannelActionName]: (data) => removeChannelSuccess({ id: data }),
-    [renameChannelActionName]: (data) => renameChannelSuccess({ channel: data }),
-  };
-  return store.dispatch(mapping[event](serverData));
-};
-
 io()
-  .on('newMessage', ({ data: { attributes } }) => mappingListener(addMessageActionName, attributes))
-  .on('newChannel', ({ data: { attributes } }) => mappingListener(addChannelActionName, attributes))
-  .on('removeChannel', ({ data: { id } }) => mappingListener(removeChannelActionName, id))
-  .on('renameChannel', ({ data: { attributes } }) => mappingListener(renameChannelActionName, attributes));
+  .on(events.newMessage, ({ data: { attributes } }) => (
+    store.dispatch(addMessage({ message: attributes }))
+  ))
+  .on(events.newChannel, ({ data: { attributes } }) => (
+    store.dispatch(addChannel({ channel: attributes }))
+  ))
+  .on(events.removeChannel, ({ data: { id } }) => (
+    store.dispatch(removeChannel({ id }))
+  ))
+  .on(events.renameChannel, ({ data: { attributes } }) => (
+    store.dispatch(renameChannel({ channel: attributes }))
+  ));
 
 ReactDOM.render(
   <Provider store={store}>

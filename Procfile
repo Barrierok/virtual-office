@@ -1,1 +1,0 @@
-web: make build && make migrate && make start

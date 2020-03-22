@@ -1,10 +1,8 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import _ from 'lodash';
-import axios from 'axios';
 
-import { removeChannelSuccess } from '../channels/channelsSlice';
-import routes from '../../routes';
+import { removeChannel } from '../channels/channelsSlice';
 
 const initialState = {
   messages: [],
@@ -14,15 +12,12 @@ const messages = createSlice({
   name: 'messages',
   initialState,
   reducers: {
-    initMessages: (state, { payload: { messages: initMessages } }) => {
-      state.messages = initMessages;
-    },
-    addMessageSuccess: (state, { payload: { message } }) => {
+    addMessage: (state, { payload: { message } }) => {
       state.messages.push(message);
     },
   },
   extraReducers: {
-    [removeChannelSuccess]: (state, { payload: { id } }) => {
+    [removeChannel]: (state, { payload: { id } }) => {
       _.remove(state.messages, ((m) => m.channelId === id));
     },
   },
@@ -30,11 +25,6 @@ const messages = createSlice({
 
 const { actions, reducer } = messages;
 
-export const { initMessages, addMessageSuccess } = actions;
-
-export const addMessage = ({ author, activeChannel, text }) => async () => {
-  const url = routes.channelMessagesPath(activeChannel);
-  await axios.post(url, { data: { attributes: { author, text } } });
-};
+export const { addMessage } = actions;
 
 export default reducer;
