@@ -38,7 +38,7 @@ const RenameChannel = (props) => {
             variant="success"
             disabled={!dirty || isSubmitting}
           >
-            Rename
+            Переименовать
           </Button>
         </Form>
       )}
@@ -47,7 +47,7 @@ const RenameChannel = (props) => {
 
   return (
     <Modal show onHide={handleHideModal}>
-      <Modal.Header closeButton>Rename Channel</Modal.Header>
+      <Modal.Header closeButton>Переименовать канал</Modal.Header>
       <Modal.Body>
         {renderForm()}
       </Modal.Body>

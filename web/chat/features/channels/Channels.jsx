@@ -41,9 +41,9 @@ const Channels = () => {
   );
 
   return (
-    <>
+    <div className="h-100">
       <div className="d-flex justify-content-around border-bottom align-items-center">
-        <span>Channels</span>
+        <span>Каналы</span>
         {!isOpenForm && <Button onClick={toggleForm} variant="wigth"><span>+</span></Button>}
         {isOpenForm && <Button onClick={toggleForm} variant="wigth"><span>&times;</span></Button>}
       </div>
@@ -66,7 +66,7 @@ const Channels = () => {
         {isOpenForm && <ChannelForm closeForm={toggleForm} />}
         <ModalRoot />
       </Nav>
-    </>
+    </div>
   );
 };
 

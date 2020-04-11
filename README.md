@@ -9,7 +9,14 @@
 4. Прописать следующие команды я начала разработки:
 
 ```
-make init
-make migrate
-make dev
+npm run i
+npm run migrate
+npm run start:dev
+```
+
+Для тестирования production сборки:
+```
+npm run i
+npm run build
+npm run start
 ```
