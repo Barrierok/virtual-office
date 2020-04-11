@@ -13,7 +13,6 @@ const MessageForm = () => {
   const onSubmit = async (values, actions) => {
     await addMessage({ activeChannel, ...values });
     actions.resetForm();
-    actions.setSubmitting(false);
   };
 
   return (
@@ -38,7 +37,7 @@ const MessageForm = () => {
                 className="w-100 mt-3"
                 disabled={!dirty || isSubmitting}
               >
-                Send
+                Отправить
               </Button>
             </Col>
           </Row>

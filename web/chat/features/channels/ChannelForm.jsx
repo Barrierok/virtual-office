@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Formik, Field, Form, ErrorMessage,
-} from 'formik';
+import { Formik, Field, Form } from 'formik';
 
 import { addChannel } from '../../handlers';
 
@@ -23,7 +21,6 @@ const ChannelForm = (props) => {
             type="text"
             className="w-100"
           />
-          <ErrorMessage name="text" />
         </Form>
       )}
     </Formik>

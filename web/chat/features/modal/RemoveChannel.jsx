@@ -24,11 +24,11 @@ const ConfirmDelete = (props) => {
       className="confirm"
     >
       <Modal.Header closeButton>
-        <Modal.Title>Are you sure?</Modal.Title>
+        <Modal.Title>Вы уверены?</Modal.Title>
       </Modal.Header>
       <Modal.Body className="d-flex justify-content-around">
-        <Button onClick={handleHideModal}>Close</Button>
-        <Button variant="danger" onClick={handleRemove}>Delete</Button>
+        <Button onClick={handleHideModal}>Закрыть</Button>
+        <Button variant="danger" onClick={handleRemove}>Удалить</Button>
       </Modal.Body>
     </Modal>
   );
