@@ -25,6 +25,10 @@ const { actions, reducer } = columns;
 
 export const { addColumn, removeNullColumns } = actions;
 
+export const columnsSelectors = {
+  columns: (state) => state.columns.data,
+};
+
 export const postColumn = (attributes) => () => service.postColumn(attributes);
 
 export default reducer;

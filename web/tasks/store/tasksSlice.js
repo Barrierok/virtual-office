@@ -19,6 +19,10 @@ const tasks = createSlice({
 
 const { actions, reducer } = tasks;
 
+export const tasksSelectors = {
+  tasks: (state) => state.tasks.data,
+};
+
 export const { addTasks } = actions;
 
 export default reducer;

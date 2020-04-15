@@ -1,8 +1,8 @@
 import React from 'react';
 import { IoMdAdd } from 'react-icons/io';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import AppBarFeaturesButton from '../common/AppBarFeaturesButton';
-import * as columnsActions from '../columns/columnsSlice';
+import { addColumn } from '../columns/columnsSlice';
 
 const navItems = [
   {
@@ -13,12 +13,12 @@ const navItems = [
   },
 ];
 
-const AppBar = (props) => {
-  const { addColumn } = props;
+const AppBar = () => {
+  const dispatch = useDispatch();
 
   const handlersMapping = {
     addNewColumn: () => {
-      addColumn({ data: null });
+      dispatch(addColumn({ data: null }));
     },
   };
 
@@ -39,12 +39,4 @@ const AppBar = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  tasks: state.tasks.data,
-});
-
-const actionCreators = {
-  addColumn: columnsActions.addColumn,
-};
-
-export default connect(mapStateToProps, actionCreators)(AppBar);
+export default AppBar;

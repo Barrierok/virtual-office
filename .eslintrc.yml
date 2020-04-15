@@ -21,4 +21,5 @@ rules:
   react/jsx-uses-react: error
   react/jsx-uses-vars: error
   jsx-a11y/no-autofocus: 0
+  no-param-reassign: off
   no-console: 0

@@ -1,13 +1,16 @@
 import React from 'react';
 import './column.css';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
-import * as columnsActions from '../columnsSlice';
+import { postColumn, removeNullColumns } from '../columnsSlice';
+import { tasksSelectors } from '../../../store/tasksSlice';
 
 const Column = (props) => {
+  const dispatch = useDispatch();
+  const tasks = useSelector(tasksSelectors.tasks);
+
   const {
-    column, tasks, newItem, postColumn,
-    removeNullColumns,
+    column, newItem,
   } = props;
 
   const formik = useFormik({
@@ -15,12 +18,14 @@ const Column = (props) => {
       columnName: '',
     },
     onSubmit({ columnName }) {
-      postColumn({ title: columnName })
+      dispatch(postColumn({ title: columnName })
         .then(() => {
-          removeNullColumns();
-        });
+          dispatch(removeNullColumns());
+        }));
     },
   });
+
+  const isFetching = formik.isSubmitting && !formik.isValidating;
 
   if (newItem) {
     return (
@@ -38,7 +43,9 @@ const Column = (props) => {
                   autoFocus
                 />
               </div>
-              <button type="submit" className="btn btn-primary btn-sm w-100">Сохранить</button>
+              <button type="submit" disabled={isFetching} className="btn btn-primary btn-sm w-100">
+                Сохранить
+              </button>
             </form>
           </div>
           <hr />
@@ -75,13 +82,4 @@ const Column = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  tasks: state.tasks.data,
-});
-
-const actionCreators = {
-  postColumn: columnsActions.postColumn,
-  removeNullColumns: columnsActions.removeNullColumns,
-};
-
-export default connect(mapStateToProps, actionCreators)(Column);
+export default Column;

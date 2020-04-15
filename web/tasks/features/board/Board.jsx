@@ -1,21 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Column from '../columns/Column/Column';
+import { columnsSelectors } from '../columns/columnsSlice';
 
-const Board = (props) => {
-  const { columns } = props;
-
-  const handleScroll = (e) => {
-    const container = document.getElementById('board');
-    const containerScrollPosition = container.scrollLeft;
-    container.scrollTo({
-      top: 0,
-      left: containerScrollPosition + e.deltaY,
-    });
-  };
+const Board = () => {
+  const columns = useSelector(columnsSelectors.columns);
 
   return (
-    <main id="board" onWheel={handleScroll} className="h-100">
+    <div id="board">
       {columns.map((i) => {
         if (i === null) {
           return (
@@ -31,12 +23,8 @@ const Board = (props) => {
           </div>
         );
       })}
-    </main>
+    </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-  columns: state.columns.data,
-});
-
-export default connect(mapStateToProps)(Board);
+export default Board;
