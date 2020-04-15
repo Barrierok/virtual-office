@@ -4,46 +4,55 @@ import {
 } from 'react-bootstrap';
 import { Formik, Field, ErrorMessage } from 'formik';
 
-import connect from '../../utils/connect';
-import { renameChannel as rc } from '../channels/channelsSlice';
-import { hideModal as hm } from './modalSlice';
+import { renameChannel } from '../../handlers';
+import { hideModal } from './modalSlice';
+import useActions from '../../utils/useActions';
 
-@connect(null, { renameChannel: rc, hideModal: hm })
-class RenameChannel extends React.PureComponent {
-  handleSubmit = async (values, actions) => {
-    const { renameChannel, id, hideModal } = this.props;
-    try {
-      await renameChannel({ id, name: values.text });
-      actions.setSubmitting(false);
-      hideModal();
-    } catch (e) {
-      actions.setFieldError('text', e.message);
-    }
-  }
+const RenameChannel = (props) => {
+  const dispatchHideModal = useActions(hideModal);
+  const { data: { id, initialValues } } = props;
 
-  renderForm = (initialValues) => (
-    <Formik onSubmit={this.handleSubmit} initialValues={initialValues}>
+  const onSubmit = async (values, actions) => {
+    await renameChannel({ id, name: values.text });
+    actions.setSubmitting(false);
+    dispatchHideModal();
+  };
+
+  const handleHideModal = () => dispatchHideModal();
+
+  const renderForm = () => (
+    <Formik onSubmit={onSubmit} initialValues={initialValues}>
       {({ dirty, isSubmitting, handleSubmit }) => (
         <Form className="d-flex" onSubmit={handleSubmit}>
-          <Field name="text" required disabled={isSubmitting} component="input" type="text" className="w-100" />
+          <Field
+            name="text"
+            required
+            disabled={isSubmitting}
+            component="input"
+            type="text"
+            className="w-100"
+          />
           <ErrorMessage name="text" />
-          <Button type="submit" variant="success" disabled={!dirty || isSubmitting}>Rename</Button>
+          <Button
+            type="submit"
+            variant="success"
+            disabled={!dirty || isSubmitting}
+          >
+            Переименовать
+          </Button>
         </Form>
       )}
     </Formik>
   );
 
-  render() {
-    const { initialValues, hideModal } = this.props;
-    return (
-      <Modal show onHide={hideModal}>
-        <Modal.Header closeButton>Rename Channel</Modal.Header>
-        <Modal.Body>
-          {this.renderForm(initialValues)}
-        </Modal.Body>
-      </Modal>
-    );
-  }
-}
+  return (
+    <Modal show onHide={handleHideModal}>
+      <Modal.Header closeButton>Переименовать канал</Modal.Header>
+      <Modal.Body>
+        {renderForm()}
+      </Modal.Body>
+    </Modal>
+  );
+};
 
 export default RenameChannel;

@@ -1,32 +1,33 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+import { createSelector } from '@reduxjs/toolkit';
 import RemoveChannel from './RemoveChannel';
 import RenameChannel from './RenameChannel';
-import connect from '../../utils/connect';
 import { renameChannelType, removeChannelType } from '../../utils/constants';
-
-const mapStateToProps = (state) => {
-  const { modal: { modalType, modalProps } } = state;
-  return { modalType, modalProps };
-};
 
 const types = {
   [renameChannelType]: RenameChannel,
   [removeChannelType]: RemoveChannel,
 };
 
-@connect(mapStateToProps, null)
-class ModalRoot extends React.Component {
-  render() {
-    const { modalProps, modalType } = this.props;
-    if (!modalType) {
-      return null;
-    }
-    const Modal = types[modalType];
-    return (
-      <Modal {...modalProps} />
-    );
+const getModalData = createSelector(
+  [
+    ({ modal }) => modal.modalType,
+    ({ modal }) => modal.modalProps,
+  ],
+  (modalType, modalProps) => ({ modalType, modalProps }),
+);
+
+const ModalRoot = () => {
+  const { modalType, modalProps } = useSelector(getModalData);
+  if (!modalType) {
+    return null;
   }
-}
+  const Modal = types[modalType];
+  return (
+    <Modal data={modalProps} />
+  );
+};
 
 export default ModalRoot;
