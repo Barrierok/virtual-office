@@ -12,7 +12,9 @@ export default (router, io) => {
       ctx.body = await columnsService.getColumns();
     })
     .post('/columns', authenticated(), async (ctx) => {
-      const { data: { attributes } } = ctx.request.body;
+      const {
+        data: { attributes },
+      } = ctx.request.body;
       const { title } = attributes;
       const column = {
         title,

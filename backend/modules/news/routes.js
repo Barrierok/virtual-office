@@ -12,7 +12,11 @@ export default (router, io) => {
       ctx.body = await collectionsService.getCollections();
     })
     .post('/collections', authenticated(), async (ctx) => {
-      const { data: { attributes: { name } } } = ctx.request.body;
+      const {
+        data: {
+          attributes: { name },
+        },
+      } = ctx.request.body;
       const { user } = ctx.state;
       const collection = {
         name,
@@ -35,7 +39,10 @@ export default (router, io) => {
     .patch('/collections/:id', async (ctx) => {
       const collectionId = Number(ctx.params.id);
       const { attributes } = ctx.request.body.data;
-      const data = await collectionsService.updateCollection(collectionId, attributes);
+      const data = await collectionsService.updateCollection(
+        collectionId,
+        attributes
+      );
 
       ctx.status = 204;
       io.emit('renameCollection', data);
@@ -47,7 +54,9 @@ export default (router, io) => {
       ctx.body = resources;
     })
     .post('/collections/:collectionId/feeds', authenticated(), async (ctx) => {
-      const { data: { attributes } } = ctx.request.body;
+      const {
+        data: { attributes },
+      } = ctx.request.body;
       const { user } = ctx.state;
       const feed = {
         ...attributes,

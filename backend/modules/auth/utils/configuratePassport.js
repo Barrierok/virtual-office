@@ -17,14 +17,17 @@ passport.deserializeUser(async (id, done) => {
   }
 });
 
-passport.use(new LocalStrategy((username, password, done) => {
-  userService.getByUsername(username)
-    .then((user) => {
-      if (user && username === user.username && password === user.password) {
-        done(null, user);
-      } else {
-        done(null, false);
-      }
-    })
-    .catch((err) => done(err));
-}));
+passport.use(
+  new LocalStrategy((username, password, done) => {
+    userService
+      .getByUsername(username)
+      .then((user) => {
+        if (user && username === user.username && password === user.password) {
+          done(null, user);
+        } else {
+          done(null, false);
+        }
+      })
+      .catch((err) => done(err));
+  })
+);

@@ -24,7 +24,10 @@ export default class ChannelsService {
   }
 
   async updateChannel(id, newData) {
-    const updatedChannel = await this.channelsRepository.updateChannel(id, newData);
+    const updatedChannel = await this.channelsRepository.updateChannel(
+      id,
+      newData
+    );
     return createResult(updatedChannel);
   }
 

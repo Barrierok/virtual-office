@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 import _ from 'lodash';
 
@@ -18,7 +17,7 @@ const messages = createSlice({
   },
   extraReducers: {
     [removeChannel]: (state, { payload: { id } }) => {
-      _.remove(state.messages, ((m) => m.channelId === id));
+      _.remove(state.messages, (m) => m.channelId === id);
     },
   },
 });

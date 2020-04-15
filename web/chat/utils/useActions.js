@@ -4,13 +4,10 @@ import { useMemo } from 'react';
 
 export default (actions) => {
   const dispatch = useDispatch();
-  return useMemo(
-    () => {
-      if (Array.isArray(actions)) {
-        return actions.map((a) => bindActionCreators(a, dispatch));
-      }
-      return bindActionCreators(actions, dispatch);
-    },
-    [actions, dispatch],
-  );
+  return useMemo(() => {
+    if (Array.isArray(actions)) {
+      return actions.map((a) => bindActionCreators(a, dispatch));
+    }
+    return bindActionCreators(actions, dispatch);
+  }, [actions, dispatch]);
 };
