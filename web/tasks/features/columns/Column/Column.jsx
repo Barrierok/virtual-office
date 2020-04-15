@@ -17,11 +17,9 @@ const Column = (props) => {
     initialValues: {
       columnName: '',
     },
-    onSubmit({ columnName }) {
-      dispatch(postColumn({ title: columnName })
-        .then(() => {
-          dispatch(removeNullColumns());
-        }));
+    onSubmit: async ({ columnName }) => {
+      await dispatch(postColumn({ title: columnName }));
+      await dispatch(removeNullColumns());
     },
   });
 

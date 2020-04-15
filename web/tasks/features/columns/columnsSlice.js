@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import * as service from '../../service';
 
 const initialState = {
@@ -29,6 +29,12 @@ export const columnsSelectors = {
   columns: (state) => state.columns.data,
 };
 
-export const postColumn = (attributes) => () => service.postColumn(attributes);
+export const postColumn = createAsyncThunk(
+  'columns/postColumn',
+  async (attributes = {}) => {
+    const response = await service.postColumn(attributes);
+    return response.data;
+  },
+);
 
 export default reducer;
