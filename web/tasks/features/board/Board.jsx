@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Column from '../columns/Column/Column';
 
-function Board(props) {
+const Board = (props) => {
   const { columns } = props;
 
   const handleScroll = (e) => {
@@ -33,7 +33,7 @@ function Board(props) {
       })}
     </main>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   columns: state.columns.data,

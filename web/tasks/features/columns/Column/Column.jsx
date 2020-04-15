@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useFormik } from 'formik';
 import * as columnsActions from '../columnsSlice';
 
-function Column(props) {
+const Column = (props) => {
   const {
     column, tasks, newItem, postColumn,
     removeNullColumns,
@@ -73,7 +73,7 @@ function Column(props) {
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   tasks: state.tasks.data,

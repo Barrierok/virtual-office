@@ -13,7 +13,7 @@ const navItems = [
   },
 ];
 
-function AppBar(props) {
+const AppBar = (props) => {
   const { addColumn } = props;
 
   const handlersMapping = {
@@ -37,7 +37,7 @@ function AppBar(props) {
       })}
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   tasks: state.tasks.data,

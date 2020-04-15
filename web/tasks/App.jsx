@@ -6,7 +6,7 @@ import Header from '../shared/Header';
 import Tasks from './features/board/Board';
 import AppBar from './features/appBar/AppBar';
 
-function App(props) {
+const App = (props) => {
   const { tasks } = props;
 
   return (
@@ -22,6 +22,6 @@ function App(props) {
       </Container>
     </>
   );
-}
+};
 
 export default App;

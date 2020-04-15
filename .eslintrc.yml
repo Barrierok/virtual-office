@@ -20,4 +20,5 @@ rules:
   react-hooks/exhaustive-deps: warn
   react/jsx-uses-react: error
   react/jsx-uses-vars: error
+  jsx-a11y/no-autofocus: 0
   no-console: 0
