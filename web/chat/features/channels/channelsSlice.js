@@ -18,8 +18,8 @@ const channels = createSlice({
     },
     removeChannel: (state, { payload: { id } }) => {
       const { activeChannel, generalId } = state;
-      state.activeChannel = (activeChannel === id ? generalId : activeChannel);
-      _.remove(state.channels, ((c) => c.id === id));
+      state.activeChannel = activeChannel === id ? generalId : activeChannel;
+      _.remove(state.channels, (c) => c.id === id);
     },
     renameChannel: (state, { payload: { channel } }) => {
       const index = state.channels.findIndex((c) => c.id === channel.id);
@@ -31,7 +31,10 @@ const channels = createSlice({
 const { actions, reducer } = channels;
 
 export const {
-  addChannel, renameChannel, removeChannel, setActiveChannel,
+  addChannel,
+  renameChannel,
+  removeChannel,
+  setActiveChannel,
 } = actions;
 
 export default reducer;
