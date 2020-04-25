@@ -1,5 +1,4 @@
-
-exports.up = (knex) => (
+exports.up = (knex) =>
   knex.schema
     .createTable('channels', (table) => {
       table.increments('id').primary();
@@ -21,11 +20,7 @@ exports.up = (knex) => (
         .inTable('channels')
         .onDelete('CASCADE')
         .index();
-    })
-);
+    });
 
-exports.down = (knex) => (
-  knex.schema
-    .dropTableIfExists('messages')
-    .dropTableIfExists('channels')
-);
+exports.down = (knex) =>
+  knex.schema.dropTableIfExists('messages').dropTableIfExists('channels');

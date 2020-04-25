@@ -1,5 +1,4 @@
-
-exports.up = (knex) => (
+exports.up = (knex) =>
   knex.schema
     .table('channels', (table) => {
       table
@@ -16,15 +15,13 @@ exports.up = (knex) => (
         .references('id')
         .inTable('users')
         .index();
-    })
-);
+    });
 
-exports.down = (knex) => (
+exports.down = (knex) =>
   knex.schema
     .table('channels', (table) => {
       table.dropColumn('owner_id');
     })
     .table('messages', (table) => {
       table.dropColumn('owner_id');
-    })
-);
+    });

@@ -23,10 +23,12 @@ export default class TasksService {
 
   async getTasks() {
     const tasks = await this.tasksRepository.getTasks();
-    return Promise.all(tasks.map((t) => {
-      if (!t.ownerId) return t;
-      return setUser(t);
-    }));
+    return Promise.all(
+      tasks.map((t) => {
+        if (!t.ownerId) return t;
+        return setUser(t);
+      })
+    );
   }
 
   async insertTask(data) {

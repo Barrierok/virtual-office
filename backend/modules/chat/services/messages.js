@@ -27,7 +27,9 @@ export default class MessagesService {
   }
 
   async getMessagesByChannelId(channelId) {
-    const messages = await this.messagesRepository.getMessagesByChannelId(channelId);
+    const messages = await this.messagesRepository.getMessagesByChannelId(
+      channelId
+    );
     return Promise.all(messages.map((m) => createResult(m)));
   }
 

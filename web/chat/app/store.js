@@ -16,5 +16,7 @@ const preloadedState = {
 };
 
 export default configureStore({
-  reducer, preloadedState, devTools: process.env.NODE_ENV !== 'production',
+  reducer,
+  preloadedState,
+  devTools: process.env.NODE_ENV !== 'production',
 });
