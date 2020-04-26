@@ -9,14 +9,14 @@
 4. Прописать следующие команды для начала разработки:
 
 ```
-npm run i
+npm i
 npm run migrate
 npm run start:dev
 ```
 
 Для тестирования production сборки:
 ```
-npm run i
+npm i
 npm run build
 npm run start
 ```
