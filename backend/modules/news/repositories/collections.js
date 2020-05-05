@@ -2,7 +2,7 @@ import models from '../models';
 
 export default class CollectionsRepository {
   constructor() {
-    this.model = models.Channel;
+    this.model = models.Collection;
   }
 
   getCollections() {

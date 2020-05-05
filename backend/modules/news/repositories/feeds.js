@@ -13,7 +13,7 @@ export default class FeedsRepository {
   }
 
   async getAllFeeds() {
-    return this.model.query().orderBy('createdAt');
+    return this.model.query().orderBy('createdAt', 'DESC');
   }
 
   async insertFeed(data) {
@@ -21,10 +21,10 @@ export default class FeedsRepository {
   }
 
   async updateFeed(id, newData) {
-    return this.model.query().findBy(id).patch(newData).returning('*');
+    return this.model.query().findById(id).patch(newData).returning('*');
   }
 
   async deleteFeed(id) {
-    return this.model.query().findBy(id).delete().returning('*');
+    return this.model.query().deleteById(id).returning('*');
   }
 }

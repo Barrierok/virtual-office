@@ -26,7 +26,7 @@ export default class FeedService {
     return Promise.all(feeds.map((f) => setUser(f)));
   }
 
-  async getMessagesByCollectionId(collectionId) {
+  async getFeedsByCollectionId(collectionId) {
     const feeds = await this.feedsRepository.getFeedsByCollectionId(collectionId);
     return Promise.all(feeds.map((f) => createResult(f)));
   }

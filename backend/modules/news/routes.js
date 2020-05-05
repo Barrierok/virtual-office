@@ -23,7 +23,7 @@ export default (router, io) => {
 
       ctx.status = 201;
       ctx.body = data;
-      io.emit('newFeed', data);
+      io.emit('newCollection', data);
     })
     .delete('/collections/:id', authenticated(), async (ctx) => {
       const collectionId = Number(ctx.params.id);
@@ -36,9 +36,12 @@ export default (router, io) => {
       const collectionId = Number(ctx.params.id);
       const { attributes } = ctx.request.body.data;
       const data = await collectionsService.updateCollection(collectionId, attributes);
-
+      console.log(ctx.request.body.data);
       ctx.status = 204;
       io.emit('renameCollection', data);
+    })
+    .get('/feeds', authenticated(), async (ctx) => {
+      ctx.body = await feedsService.geAllFeeds();
     })
     .get('/collections/:collectionId/feeds', authenticated(), async (ctx) => {
       const collectionId = Number(ctx.params.collectionId);
@@ -58,47 +61,35 @@ export default (router, io) => {
 
       ctx.status = 201;
       ctx.body = data;
-      io.emit('newFeed', data);
+      io.emit('addFeed', data);
+    })
+    .patch('/collections/:collectionId/feeds/:id', authenticated(), async (ctx) => {
+      const feedId = Number(ctx.params.id);
+      const { attributes } = ctx.request.body.data;
+      const data = await feedsService.updateFeed(feedId, attributes);
+
+      ctx.status = 201;
+      io.emit('updateFeed', data);
+    })
+    .delete('/collections/:collectionId/feeds/:id', authenticated(), async (ctx) => {
+      const feedId = Number(ctx.params.id);
+      const data = await feedsService.deleteFeed(feedId);
+
+      ctx.status = 204;
+      io.emit('removeFeed', data);
     });
-  // .patch('/collections/:collectionId/feeds/:id', authenticated(), async (ctx) => {
-  //   const { data: { attributes } } = ctx.request.body;
-  //   const { user } = ctx.state;
-  //   const feed = {
-  //     ...attributes,
-  //     ownerId: user.id,
-  //     collectionId: Number(ctx.params.collectionId),
-  //   };
-  //   const data = await feedsService.updateFeed(feed);
-
-  //   ctx.status = 201;
-  //   ctx.body = data;
-  //   io.emit('updateFeed', data);
-  // })
-  // .delete('/collections/:collectionId/feeds/:id', authenticated(), async (ctx) => {
-  //   const { data: { attributes } } = ctx.request.body;
-  //   const { user } = ctx.state;
-  //   const feed = {
-  //     ...attributes,
-  //     ownerId: user.id,
-  //     collectionId: Number(ctx.params.collectionId),
-  //   };
-  //   const data = await feedsService.deleteFeed(feed);
-
-  //   ctx.status = 201;
-  //   ctx.body = data;
-  //   io.emit('deleteFeed', data);
-  // });
 
   return router
     .get('/news', authenticated(), async (ctx) => {
       const collections = await collectionsService.getCollections();
       const feeds = await feedsService.geAllFeeds();
       const { username } = ctx.state.user;
-      await ctx.render('indexcollectionsRepository', {
+      await ctx.render('news', {
         gon: {
           username,
           collections,
           feeds,
+          currentCollectionId: collections[0].id,
         },
       });
     })

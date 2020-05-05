@@ -16,9 +16,9 @@ export default class Feed extends Model {
       properties: {
         id: { type: 'integer' },
         title: { type: 'string', minLength: 1, maxLength: 255 },
-        body: { type: 'string', minLength: 1, maxLength: 5000 },
+        body: { type: 'string', minLength: 1 },
         collectionId: { type: 'integer' },
-        ownerId: { type: 'string', minLength: 1, maxLength: 100 },
+        ownerId: { type: 'integer' },
         archive: { type: 'boolean' },
         created_at: { type: 'date-time' },
       },
