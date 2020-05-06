@@ -7,17 +7,17 @@ html(lang="en")
   body
     .container.vh-100
       .d-flex.justify-content-center.align-items-center.h-100.flex-column
-        h2 Login  
+        h2 Войти  
         form.w-50(action="/login" method="post")
           div(class="form-group")
-            label(for="username") Username
+            label(for="username") Имя пользователя
             input(type="text" class="form-control" id="username" name="username" required)
           div(class="form-group")
-            label(for="password") Password
+            label(for="password") Пароль
             input(type="password" class="form-control" id="password" name="password" required)
-          button(type="submit" class="btn btn-primary btn-block") Submit
+          button(type="submit" class="btn btn-primary btn-block") Подтвердить
           .d-flex.justify-content-between.w-100.form-group.mt-4
-            a(href="/register") Registration
-            a(href="/") Home
+            a(href="/register") Регистрация
+            a(href="/") Главная
 
   

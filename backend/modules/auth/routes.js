@@ -15,10 +15,13 @@ export default (router) => {
       ctx.logout();
       ctx.redirect('/login');
     })
-    .post('/login', passport.authenticate('local', {
-      successRedirect: '/chat',
-      failureRedirect: '/login',
-    }))
+    .post(
+      '/login',
+      passport.authenticate('local', {
+        successRedirect: '/chat',
+        failureRedirect: '/login',
+      })
+    )
     .post('/register', async (ctx) => {
       const data = ctx.request.body;
       const user = await usersService.insert(data);

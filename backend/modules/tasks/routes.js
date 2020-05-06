@@ -11,7 +11,9 @@ export default (router, io) => {
       ctx.body = await tasksService.getTasks();
     })
     .post('/tasks', authenticated(), async (ctx) => {
-      const { data: { attributes } } = ctx.request.body;
+      const {
+        data: { attributes },
+      } = ctx.request.body;
       const { title, description, parentId } = attributes;
       const { user } = ctx.state;
       const task = {

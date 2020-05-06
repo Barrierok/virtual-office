@@ -34,10 +34,7 @@ export default () => {
   app.keys = [process.env.SECRET];
   app.use(session({}, app));
   app.use(bodyParser());
-  app.use(views(
-    path.join(__dirname, '..', 'views'),
-    { extension: 'pug' },
-  ));
+  app.use(views(path.join(__dirname, '..', 'views'), { extension: 'pug' }));
   app.use(koaLogger());
   app.use(errorHandler);
   app.use(passport.initialize());

@@ -9,7 +9,7 @@
 3. Создать и заполнить .env файл по примеру .env.example
 4. Прописать следующие команды для начала разработки:
 
-```npm run i
+```npm i
 npm run migrate
 npm run start:dev
 ```
