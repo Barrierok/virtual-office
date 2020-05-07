@@ -1,7 +1,7 @@
 const host = '';
-const prefix = 'api/v1/tasksManager';
+const prefix = 'api/v1/tasks';
 
 export default {
-  tasksPath: () => [host, prefix, 'tasks'].join('/'),
-  taskPath: (id) => [host, prefix, 'tasks', id].join('/'),
+  columnsPath: () => [host, prefix, 'columns'].join('/'),
+  columnPath: (id) => [host, prefix, 'column', id].join('/'),
 };

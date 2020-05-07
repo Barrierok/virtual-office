@@ -21,14 +21,18 @@ export default class TasksService {
     this.tasksRepository = new repositories.TasksRepository();
   }
 
-  async getTasks() {
-    const tasks = await this.tasksRepository.getTasks();
-    return Promise.all(
-      tasks.map((t) => {
-        if (!t.ownerId) return t;
-        return setUser(t);
-      })
-    );
+
+  async getAllTasks() {
+    const tasks = await this.tasksRepository.getAllTasks();
+    return Promise.all(tasks.map((t) => {
+      if (!t.ownerId) return t;
+      return setUser(t);
+    }));
+  }
+
+  async getTasksByColumnId(columnId) {
+    const tasks = await this.tasksRepository.getTasksByColumnId(columnId);
+    return Promise.all(tasks.map((i) => createResult(i)));
   }
 
   async insertTask(data) {
