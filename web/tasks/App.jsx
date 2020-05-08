@@ -1,28 +1,29 @@
 import React from 'react';
-import { Col, Container, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
+import './tasks.css';
 
 import Header from '../shared/Header';
-import Tasks from './features/tasks/Tasks';
-import SideBar from './features/sideBar/SideBar';
+import Board from './features/board/Board';
+import AppBar from './features/appBar/AppBar';
 
-function App(props) {
+const App = (props) => {
   const { tasks } = props;
 
   return (
     <>
-      <Header active="tasks" bg="primary" />
-      <Container fluid as="main" className="h-100">
-        <Row as="article" className="h-100">
-          <Col sl={12} md={2} lg={2} className="m-0 p-0">
-            <SideBar />
-          </Col>
-          <Col sl={12} md={10} lg={10} className="m-0 p-0 h-100 w-100 border-top border-left">
-            <Tasks tasks={tasks} />
-          </Col>
-        </Row>
-      </Container>
+      <div className="h-100 overflow-hidden">
+        <Header active="tasks" bg="primary" />
+        <div className="py-1 px-3 h-100">
+          <Row as="article" className="w-100">
+            <AppBar />
+          </Row>
+          <Row as="article" className="h-100">
+            <Board tasks={tasks} />
+          </Row>
+        </div>
+      </div>
     </>
   );
-}
+};
 
 export default App;

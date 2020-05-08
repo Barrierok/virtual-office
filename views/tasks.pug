@@ -1,10 +1,10 @@
 doctype html
-html(lang="ru")
+html.h-100(lang="ru")
     head
         title= Задачи
         meta(name="viewport" content="width=device-width, initial-scale=1")
         script.
           var gon = !{JSON.stringify(gon)};
-    body
+    body.h-100
         #tasks
         script(src='/assets/tasks.bundle.js')

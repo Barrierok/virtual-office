@@ -5,8 +5,15 @@ export default class TasksRepository {
     this.model = models.Tasks;
   }
 
-  getTasks() {
+  getAllTasks() {
     return this.model.query().orderBy('createdAt');
+  }
+
+  getTasksByColumnId(id) {
+    return this.model
+      .query()
+      .where('columnId', id)
+      .orderBy('createdAt', 'DESC');
   }
 
   insertTask(data) {
