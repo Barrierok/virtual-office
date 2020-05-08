@@ -21,13 +21,9 @@ export default class TasksService {
     this.tasksRepository = new repositories.TasksRepository();
   }
 
-
   async getAllTasks() {
     const tasks = await this.tasksRepository.getAllTasks();
-    return Promise.all(tasks.map((t) => {
-      if (!t.ownerId) return t;
-      return setUser(t);
-    }));
+    return Promise.all(tasks.map((t) => setUser(t)));
   }
 
   async getTasksByColumnId(columnId) {

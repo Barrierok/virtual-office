@@ -9,10 +9,10 @@ import io from 'socket.io-client';
 
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-import App from './App';
+import App from './app/App';
 import UsernameContext from '../shared/UsernameContext';
 import { socketEvents } from './utils/constants';
-import reducer from './store';
+import reducer from './app/rootReducer';
 import { addColumn } from './features/columns/columnsSlice';
 
 const { username, tasks, columns } = gon;
@@ -34,11 +34,9 @@ const store = configureStore({
   },
 });
 
-io()
-  .on(socketEvents.newColumn, ({ data }) => {
-    store.dispatch(addColumn({ data: data.attributes }));
-  });
-
+io().on(socketEvents.newColumn, ({ data }) => {
+  store.dispatch(addColumn({ data: data.attributes }));
+});
 
 ReactDOM.render(
   <Provider store={store}>
@@ -46,5 +44,5 @@ ReactDOM.render(
       <App />
     </UsernameContext.Provider>
   </Provider>,
-  document.getElementById('tasks'),
+  document.getElementById('tasks')
 );

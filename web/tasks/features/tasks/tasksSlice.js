@@ -10,9 +10,9 @@ const tasks = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    addTasks(state, action) {
+    addTask(state, action) {
       const { data } = action.payload;
-      state.data = data;
+      state.data.push(data);
     },
   },
 });

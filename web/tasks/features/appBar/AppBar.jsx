@@ -1,7 +1,7 @@
 import React from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
-import AppBarFeaturesButton from '../common/AppBarFeaturesButton';
+import AppBarFeaturesButton from './AppBarFeaturesButton';
 import { addColumn } from '../columns/columnsSlice';
 
 const navItems = [
@@ -25,9 +25,7 @@ const AppBar = () => {
   return (
     <div className="d-flex flex-grow-1">
       {navItems.map((i) => {
-        const {
-          id, title, icon, handler,
-        } = i;
+        const { id, title, icon, handler } = i;
         return (
           <AppBarFeaturesButton key={id} onClick={handlersMapping[handler]}>
             {icon}

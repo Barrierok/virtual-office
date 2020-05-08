@@ -29,6 +29,7 @@
     padding: 10px 8px;
     position: relative;
     min-height: 20px;
+    color: #172b4d;
 }
 
 .column-tasks {
@@ -45,5 +46,10 @@
     min-height: 38px;
     max-height: 38px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    color: #5e6c84;
+}
+
+.add-task {
+    cursor: pointer;
 }

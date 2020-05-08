@@ -1,5 +1,5 @@
 import React from 'react';
-import './comon.css';
+import '../comon.css';
 
 const AppBarFeaturesButton = (props) => {
   const { children, onClick } = props;

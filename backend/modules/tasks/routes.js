@@ -12,7 +12,9 @@ export default (router, io) => {
       ctx.body = await columnsService.getColumns();
     })
     .post('/columns', authenticated(), async (ctx) => {
-      const { data: { attributes } } = ctx.request.body;
+      const {
+        data: { attributes },
+      } = ctx.request.body;
       const { title } = attributes;
       const column = {
         title,
@@ -30,8 +32,25 @@ export default (router, io) => {
       ctx.status = 204;
       io.emit('removeColumn', data);
     })
-    .get('columns/tasks', authenticated(), async (ctx) => {
+    .get('/columns/tasks', authenticated(), async (ctx) => {
       ctx.body = await tasksService.getAllTasks();
+    })
+    .post('/columns/:id/task', authenticated(), async (ctx) => {
+      const columnId = Number(ctx.params.id);
+      const { user } = ctx.state;
+
+      const {
+        data: { attributes },
+      } = ctx.request.body;
+      const task = {
+        ...attributes,
+        ownerId: user.id,
+        columnId,
+      };
+      const data = await tasksService.insertTask(task);
+
+      ctx.status(201);
+      io.emit('createTask', data);
     });
 
   return router
