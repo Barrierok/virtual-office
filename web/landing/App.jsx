@@ -13,6 +13,7 @@ import Container from '@material-ui/core/Container';
 import Link from '@material-ui/core/Link';
 import chatScreen from './chat.png';
 import tasksScreen from './tasks.png';
+import newsScreen from './news.png';
 import Header from '../shared/Header';
 
 function Copyright() {
@@ -80,9 +81,9 @@ const cards = [
   {
     header: 'Лента новостей',
     link: '/news',
-    image: 'https://source.unsplash.com/random',
+    image: `${newsScreen}`,
     author: 'Павел Дерюгин',
-    description: 'Новости',
+    description: 'Создает информационное поле компании, позволяет быстрее уведомлять сотрудников, наглядно демонстрирует ваши успехи.',
   },
 ];
 

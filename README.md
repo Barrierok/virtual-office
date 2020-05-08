@@ -1,4 +1,5 @@
 # diploma
+
 Можно потестить: [Чат](https://hhdiploma.herokuapp.com/chat)
 
 Чтобы заработал проект для разработки нужно сделать несколько вещей:
@@ -8,15 +9,14 @@
 3. Создать и заполнить .env файл по примеру .env.example
 4. Прописать следующие команды для начала разработки:
 
-```
-npm i
+```npm i
 npm run migrate
 npm run start:dev
 ```
 
 Для тестирования production сборки:
-```
-npm i
+
+```npm run i
 npm run build
 npm run start
 ```

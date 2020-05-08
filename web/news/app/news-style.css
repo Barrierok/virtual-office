@@ -1,0 +1,79 @@
+.quill {
+  background-color: white;
+}
+
+.ql-toolbar {
+  padding: 3px !important;
+}
+
+.ql-editor {
+  min-height: 200px !important;
+  max-height: 200px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+
+.ql-container {
+  height: 200px !important;
+}
+
+.ql-align-right {
+  text-align: right;
+}
+
+.ql-align-left {
+  text-align: left;
+}
+
+.ql-align-center {
+  text-align: center;
+}
+
+blockquote {
+  padding-left: 10px;
+  border-left: 4px solid lightgray;
+}
+
+.container-news {
+  height: calc(100% - 63px);
+}
+
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-color: #f8fafb;
+}
+
+.fields {
+  background-color: #f8fafb;
+  overflow-y: auto;
+  height: 90%;
+}
+
+.collections-container {
+  width: 300px;
+  background-color: white;
+}
+
+.feed {
+  background-color: white;
+}
+
+.feed:not(:first-child) {
+  margin-top: 30px;
+}
+
+.feed p, .feed ul, .feed blockquote {
+  word-wrap: break-word;
+}
+
+.feed img {
+  height: 50%;
+  width: 50%;
+}
+
+.collections {
+  height: calc(100% - 43px);
+  overflow: auto;
+}
