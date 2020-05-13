@@ -2,7 +2,7 @@ import React from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
 import AppBarFeaturesButton from './AppBarFeaturesButton';
-import { addColumn } from '../columns/columnsSlice';
+import { addColumn, removeNullColumns } from '../columns/columnsSlice';
 
 const navItems = [
   {
@@ -18,6 +18,7 @@ const AppBar = () => {
 
   const handlersMapping = {
     addNewColumn: () => {
+      dispatch(removeNullColumns());
       dispatch(addColumn({ data: null }));
     },
   };

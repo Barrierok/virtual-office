@@ -13,6 +13,10 @@ export default class UsersService {
     return this.usersRepository.getByUsername(username);
   }
 
+  getAll() {
+    return this.usersRepository.getAll();
+  }
+
   insert(user) {
     return this.usersRepository.insert(user);
   }

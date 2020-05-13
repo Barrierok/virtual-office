@@ -15,3 +15,8 @@ export const postTask = async (id, attributes) => {
   const url = routes.createTask(id);
   await axios.post(url, { data: { attributes } });
 };
+
+export const fetchUsers = async () => {
+  const url = routes.usersPath();
+  return await axios.get(url);
+};
