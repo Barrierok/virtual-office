@@ -6,7 +6,7 @@ const Task = (props) => {
 
   return (
     <div className="task">
-      <h5>{title}</h5>
+      <h6>{title}</h6>
       <span>{description}</span>
     </div>
   );

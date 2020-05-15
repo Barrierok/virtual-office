@@ -8,11 +8,11 @@ const setUser = async (task) => {
   return _.omit({ ...task, author }, 'ownerId');
 };
 
-const createResult = (task) => ({
+const createResult = async (task) => ({
   data: {
     type: 'tasks',
     id: task.id,
-    attributes: setUser(task),
+    attributes: await setUser(task),
   },
 });
 
@@ -33,7 +33,7 @@ export default class TasksService {
 
   async insertTask(data) {
     const insertedTask = await this.tasksRepository.insertTask(data);
-    return createResult(insertedTask);
+    return await createResult(insertedTask);
   }
 
   async updateTask(id, newData) {

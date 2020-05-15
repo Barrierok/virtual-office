@@ -32,6 +32,7 @@ export default class Tasks extends BaseModel {
         description: { type: 'string', minLength: 1, maxLength: 320 },
         columnId: { type: 'integer' },
         ownerId: { type: 'integer' },
+        users: { type: 'string' },
         createdAt: { type: 'date-time' },
         updatedAt: { type: 'date-time' },
       },

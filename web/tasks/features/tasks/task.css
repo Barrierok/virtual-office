@@ -1,5 +1,5 @@
 .task {
-  padding: 0 5px;
+  padding: 5px 9px;
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 1px 0 rgba(9,30,66,.25);
@@ -7,8 +7,11 @@
   display: block;
   margin-bottom: 8px;
   max-width: 300px;
-  min-height: 20px;
+  min-height: 30px;
   position: relative;
   text-decoration: none;
   z-index: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-wrap: break-word;
 }

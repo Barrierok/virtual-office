@@ -5,6 +5,7 @@ import authenticated from '../auth/utils';
 export default (router, io) => {
   const tasksService = new services.TasksService();
   const columnsService = new services.ColumnsService();
+  // const usersTasksService = new services.UsersTasksService();
   const apiRouter = new Router();
 
   apiRouter
@@ -42,15 +43,19 @@ export default (router, io) => {
       const {
         data: { attributes },
       } = ctx.request.body;
+
+      const { users, ...rest } = attributes;
       const task = {
-        ...attributes,
+        ...rest,
         ownerId: user.id,
         columnId,
       };
       const data = await tasksService.insertTask(task);
 
-      ctx.status(201);
-      io.emit('createTask', data);
+      ctx.status = 201;
+      io.emit('addTask', data);
+
+      // await usersTasksService.insertUsersToTask(users, data.data.id);
     });
 
   return router

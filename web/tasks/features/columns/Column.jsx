@@ -33,6 +33,8 @@ const Column = (props) => {
 
   const isFetching = formik.isSubmitting && !formik.isValidating;
 
+  const stopWheelX = (e) => e.stopPropagation();
+
   if (newItem) {
     return (
       <div className="column-cnt">
@@ -70,7 +72,7 @@ const Column = (props) => {
     <div className="column-cnt">
       <div className="column-content">
         <h6 className="column-header ml-2">{column.title}</h6>
-        <div className="column-tasks">
+        <div className="column-tasks" onWheel={stopWheelX}>
           {columnTasks.map((i) => (
             <Task task={i} key={i.id} />
           ))}

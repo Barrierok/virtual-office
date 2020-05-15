@@ -1,20 +1,38 @@
 import React, { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { hideModal } from './modalSlice';
 import { useFormik } from 'formik';
-import { fetchUsers } from '../../service';
+import { fetchUsers, postTask } from '../../service';
+import { keys, toNumber } from 'lodash';
 
 const AddTask = (props) => {
   const dispatch = useDispatch();
   const [users, setUsers] = useState([]);
   const [isUsersLoading, setUsersLoading] = useState(false);
 
+  const { columnId } = props.data;
+
   const formik = useFormik({
     initialValues: {
       title: '',
       description: '',
-      users: [],
+      users: {},
+    },
+    onSubmit: async (values) => {
+      const usersIds = keys(values.users).map(toNumber);
+      const attributes = {
+        title: values.title,
+        description: values.description,
+        users: usersIds,
+      };
+      try {
+        await postTask(columnId, attributes);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        dispatch(hideModal());
+      }
     },
   });
 
@@ -44,7 +62,7 @@ const AddTask = (props) => {
               </label>
               <div className="col-sm-10">
                 <input
-                  type="email"
+                  type="text"
                   className="form-control"
                   id="inputEmail3"
                   name="title"
@@ -75,7 +93,7 @@ const AddTask = (props) => {
                 </legend>
                 <div className="col-sm-10">
                   {isUsersLoading && <span>Загрузка пользователей...</span>}
-                  {users.map((u) => {
+                  {users.map((u, i) => {
                     const { username, id } = u;
                     return (
                       <div className="form-check" key={`user-${id}`}>
@@ -83,6 +101,8 @@ const AddTask = (props) => {
                           className="form-check-input"
                           type="checkbox"
                           id="gridCheck1"
+                          name={`users[${id}]`}
+                          onChange={formik.handleChange}
                         />
                         <label
                           className="form-check-label"
@@ -100,7 +120,11 @@ const AddTask = (props) => {
               <button className="btn btn-secondary" onClick={handleHideModal}>
                 Отменить
               </button>
-              <button type="submit" className="btn btn-primary mx-2">
+              <button
+                type="submit"
+                className="btn btn-primary mx-2"
+                disabled={formik.isSubmitting}
+              >
                 Сохранить
               </button>
             </div>

@@ -23,6 +23,6 @@ export const tasksSelectors = {
   tasks: (state) => state.tasks.data,
 };
 
-export const { addTasks } = actions;
+export const { addTask } = actions;
 
 export default reducer;

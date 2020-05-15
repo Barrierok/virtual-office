@@ -14,6 +14,7 @@ import UsernameContext from '../shared/UsernameContext';
 import { socketEvents } from './utils/constants';
 import reducer from './app/rootReducer';
 import { addColumn } from './features/columns/columnsSlice';
+import { addTask } from './features/tasks/tasksSlice';
 
 const { username, tasks, columns } = gon;
 
@@ -34,9 +35,13 @@ const store = configureStore({
   },
 });
 
-io().on(socketEvents.newColumn, ({ data }) => {
-  store.dispatch(addColumn({ data: data.attributes }));
-});
+io()
+  .on(socketEvents.newColumn, ({ data }) => {
+    store.dispatch(addColumn({ data: data.attributes }));
+  })
+  .on(socketEvents.addTask, ({ data }) => {
+    store.dispatch(addTask({ data: data.attributes }));
+  });
 
 ReactDOM.render(
   <Provider store={store}>

@@ -11,8 +11,8 @@ export const removeColumn = async (id) => {
   await axios.delete(url);
 };
 
-export const postTask = async (id, attributes) => {
-  const url = routes.createTask(id);
+export const postTask = async (columnId, attributes) => {
+  const url = routes.createTask(columnId);
   await axios.post(url, { data: { attributes } });
 };
 
