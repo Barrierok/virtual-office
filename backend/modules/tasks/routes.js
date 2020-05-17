@@ -5,6 +5,7 @@ import authenticated from '../auth/utils';
 export default (router, io) => {
   const tasksService = new services.TasksService();
   const columnsService = new services.ColumnsService();
+  // const usersTasksService = new services.UsersTasksService();
   const apiRouter = new Router();
 
   apiRouter
@@ -12,7 +13,9 @@ export default (router, io) => {
       ctx.body = await columnsService.getColumns();
     })
     .post('/columns', authenticated(), async (ctx) => {
-      const { data: { attributes } } = ctx.request.body;
+      const {
+        data: { attributes },
+      } = ctx.request.body;
       const { title } = attributes;
       const column = {
         title,
@@ -30,8 +33,29 @@ export default (router, io) => {
       ctx.status = 204;
       io.emit('removeColumn', data);
     })
-    .get('columns/tasks', authenticated(), async (ctx) => {
+    .get('/columns/tasks', authenticated(), async (ctx) => {
       ctx.body = await tasksService.getAllTasks();
+    })
+    .post('/columns/:id/task', authenticated(), async (ctx) => {
+      const columnId = Number(ctx.params.id);
+      const { user } = ctx.state;
+
+      const {
+        data: { attributes },
+      } = ctx.request.body;
+
+      const { users, ...rest } = attributes;
+      const task = {
+        ...rest,
+        ownerId: user.id,
+        columnId,
+      };
+      const data = await tasksService.insertTask(task);
+
+      ctx.status = 201;
+      io.emit('addTask', data);
+
+      // await usersTasksService.insertUsersToTask(users, data.data.id);
     });
 
   return router

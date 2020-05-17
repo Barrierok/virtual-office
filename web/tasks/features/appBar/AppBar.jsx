@@ -1,8 +1,8 @@
 import React from 'react';
 import { IoMdAdd } from 'react-icons/io';
 import { useDispatch } from 'react-redux';
-import AppBarFeaturesButton from '../common/AppBarFeaturesButton';
-import { addColumn } from '../columns/columnsSlice';
+import AppBarFeaturesButton from './AppBarFeaturesButton';
+import { addColumn, removeNullColumns } from '../columns/columnsSlice';
 
 const navItems = [
   {
@@ -18,6 +18,7 @@ const AppBar = () => {
 
   const handlersMapping = {
     addNewColumn: () => {
+      dispatch(removeNullColumns());
       dispatch(addColumn({ data: null }));
     },
   };
@@ -25,9 +26,7 @@ const AppBar = () => {
   return (
     <div className="d-flex flex-grow-1">
       {navItems.map((i) => {
-        const {
-          id, title, icon, handler,
-        } = i;
+        const { id, title, icon, handler } = i;
         return (
           <AppBarFeaturesButton key={id} onClick={handlersMapping[handler]}>
             {icon}

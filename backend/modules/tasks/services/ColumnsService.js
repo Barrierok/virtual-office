@@ -24,7 +24,10 @@ export default class ColumnsService {
   }
 
   async updateColumn(id, newData) {
-    const updatedColumn = await this.columnsRepository.updateColumn(id, newData);
+    const updatedColumn = await this.columnsRepository.updateColumn(
+      id,
+      newData
+    );
     return createResult(updatedColumn);
   }
 

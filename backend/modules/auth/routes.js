@@ -29,5 +29,8 @@ export default (router) => {
         return ctx.redirect('/login');
       }
       return ctx.redirect('/register');
+    })
+    .get('/users', async (ctx) => {
+      ctx.body = await usersService.getAll();
     });
 };

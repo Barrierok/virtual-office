@@ -25,14 +25,14 @@ export default class Tasks extends BaseModel {
   static get jsonSchema() {
     return {
       type: 'object',
-      required: ['title', 'parentId', 'ownerId', 'status'],
+      required: ['title', 'columnId', 'ownerId'],
       properties: {
         id: { type: 'integer' },
-        title: { type: 'string', minLength: 5, maxLength: 100 },
-        description: { type: 'string', minLength: 1, maxLength: 320 },
-        status: { type: 'string', minLength: 1, maxLength: 32 },
-        parentId: { type: ['integer', null] },
+        title: { type: 'string', minLength: 1, maxLength: 100 },
+        description: { type: 'string' },
+        columnId: { type: 'integer' },
         ownerId: { type: 'integer' },
+        users: { type: 'string' },
         createdAt: { type: 'date-time' },
         updatedAt: { type: 'date-time' },
       },

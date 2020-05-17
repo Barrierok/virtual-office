@@ -1,10 +1,11 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
-import './tasks.css';
+import '../tasks.css';
 
-import Header from '../shared/Header';
-import Board from './features/board/Board';
-import AppBar from './features/appBar/AppBar';
+import Header from '../../shared/Header';
+import Dashboard from '../features/dashboard/Dashboard';
+import AppBar from '../features/appBar/AppBar';
+import ModalRoot from '../features/modal/ModalRoot';
 
 const App = (props) => {
   const { tasks } = props;
@@ -18,10 +19,11 @@ const App = (props) => {
             <AppBar />
           </Row>
           <Row as="article" className="h-100">
-            <Board tasks={tasks} />
+            <Dashboard tasks={tasks} />
           </Row>
         </div>
       </div>
+      <ModalRoot />
     </>
   );
 };

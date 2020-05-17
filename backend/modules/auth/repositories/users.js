@@ -13,6 +13,10 @@ export default class UserRepository {
     return this.model.query().findOne({ username });
   }
 
+  getAll() {
+    return this.model.query().orderBy('id');
+  }
+
   insert(user) {
     return this.model.query().insert(user).returning('*');
   }

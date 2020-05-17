@@ -1,6 +1,9 @@
 export const socketEvents = {
   newColumn: 'newColumn',
   removeColumn: 'removeColumn',
+  addTask: 'addTask',
 };
 
-export default socketEvents;
+export const modalTypes = {
+  addTask: 'addTask',
+};

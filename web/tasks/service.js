@@ -10,3 +10,13 @@ export const removeColumn = async (id) => {
   const url = routes.columnPath(id);
   await axios.delete(url);
 };
+
+export const postTask = async (columnId, attributes) => {
+  const url = routes.createTask(columnId);
+  await axios.post(url, { data: { attributes } });
+};
+
+export const fetchUsers = async () => {
+  const url = routes.usersPath();
+  return await axios.get(url);
+};

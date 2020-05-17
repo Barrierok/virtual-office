@@ -14,11 +14,7 @@ export default class ColumnsRepository {
   }
 
   updateColumn(id, newData) {
-    return this.model
-      .query()
-      .findById(id)
-      .patch(newData)
-      .returning('*');
+    return this.model.query().findById(id).patch(newData).returning('*');
   }
 
   deleteColumns(id) {
