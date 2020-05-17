@@ -6,7 +6,7 @@
     display: inline-block;
     vertical-align: top;
     white-space: nowrap;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .column-cnt:first-child {

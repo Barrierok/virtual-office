@@ -5,6 +5,8 @@ exports.up = (knex) =>
       .unsigned()
       .references('id')
       .inTable('columns')
+      .onDelete('CASCADE')
+      .onUpdate('CASCADE')
       .index();
   });
 

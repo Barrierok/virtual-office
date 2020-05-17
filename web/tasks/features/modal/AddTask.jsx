@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { Modal } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
 import { hideModal } from './modalSlice';
 import { useFormik } from 'formik';
 import { fetchUsers, postTask } from '../../service';
@@ -57,30 +57,21 @@ const AddTask = (props) => {
         <div className="add-task-form w-100">
           <form onSubmit={formik.handleSubmit}>
             <div className="form-group row">
-              <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-                Заголовок
-              </label>
+              <label className="col-sm-2 col-form-label">Заголовок</label>
               <div className="col-sm-10">
                 <input
                   type="text"
                   className="form-control"
-                  id="inputEmail3"
                   name="title"
                   onChange={formik.handleChange}
                 />
               </div>
             </div>
             <div className="form-group row">
-              <label
-                htmlFor="inputPassword3"
-                className="col-sm-2 col-form-label"
-              >
-                Описание
-              </label>
+              <label className="col-sm-2 col-form-label">Описание</label>
               <div className="col-sm-10">
                 <textarea
                   className="form-control"
-                  id="inputPassword3"
                   name="description"
                   onChange={formik.handleChange}
                 />
@@ -100,13 +91,13 @@ const AddTask = (props) => {
                         <input
                           className="form-check-input"
                           type="checkbox"
-                          id="gridCheck1"
+                          id={`user-${i}`}
                           name={`users[${id}]`}
                           onChange={formik.handleChange}
                         />
                         <label
                           className="form-check-label"
-                          htmlFor="gridCheck1"
+                          htmlFor={`user-${i}`}
                         >
                           {username}
                         </label>
