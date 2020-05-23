@@ -20,14 +20,11 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      Все права защищены BadBoys United, LLC
-      {' '}
-      {new Date().getFullYear()}
+      Все права защищены BadBoys United, LLC {new Date().getFullYear()}
       {'.'}
     </Typography>
   );
 }
-
 
 const useStyles = makeStyles((theme) => ({
   icon: {
@@ -51,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia: {
     paddingTop: '56.25%', // 16:9
-    backgroundSize: 'cover',
+    backgroundSize: '100% 100%',
     width: '100%',
   },
   cardContent: {
@@ -75,7 +72,8 @@ const cards = [
     header: 'Менеджер задач',
     link: '/tasks',
     author: 'Александр Колиух',
-    description: 'Повышает эффективность распределения обязанностей на проекте, за счёт автоматизации и персонализации исполняемых функций.',
+    description:
+      'Повышает эффективность распределения обязанностей на проекте, за счёт автоматизации и персонализации исполняемых функций.',
     image: `${tasksScreen}`,
   },
   {
@@ -83,7 +81,8 @@ const cards = [
     link: '/news',
     image: `${newsScreen}`,
     author: 'Павел Дерюгин',
-    description: 'Создает информационное поле компании, позволяет быстрее уведомлять сотрудников, наглядно демонстрирует ваши успехи.',
+    description:
+      'Создает информационное поле компании, позволяет быстрее уведомлять сотрудников, наглядно демонстрирует ваши успехи.',
   },
 ];
 
@@ -100,10 +99,21 @@ export default function App() {
         {/* Hero unit */}
         <section className={classes.heroContent}>
           <Container maxWidth="sm">
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+            <Typography
+              component="h1"
+              variant="h2"
+              align="center"
+              color="textPrimary"
+              gutterBottom
+            >
               Виртуальный офис
             </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" paragraph>
+            <Typography
+              variant="h5"
+              align="center"
+              color="textSecondary"
+              paragraph
+            >
               Информационная система для автоматизации деятельности
             </Typography>
           </Container>
@@ -123,13 +133,8 @@ export default function App() {
                     <Typography gutterBottom variant="h5" component="h2">
                       {card.header}
                     </Typography>
-                    <Typography>
-                      {card.description}
-                    </Typography>
-                    <Typography>
-                      ©
-                      {card.author}
-                    </Typography>
+                    <Typography>{card.description}</Typography>
+                    <Typography>©{card.author}</Typography>
                   </CardContent>
                   <CardActions>
                     <Button size="small" color="primary">
