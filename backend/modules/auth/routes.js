@@ -18,7 +18,7 @@ export default (router) => {
     .post(
       '/login',
       passport.authenticate('local', {
-        successRedirect: '/chat',
+        successRedirect: '/',
         failureRedirect: '/login',
       })
     )
