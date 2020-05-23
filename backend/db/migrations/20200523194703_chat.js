@@ -6,6 +6,12 @@ exports.up = (knex) =>
       table.boolean('removable');
       table.datetime('created_at');
       table.datetime('updated_at');
+      table
+        .integer('owner_id')
+        .unsigned()
+        .references('id')
+        .inTable('users')
+        .index();
     })
     .createTable('messages', (table) => {
       table.increments('id').primary();
@@ -19,6 +25,12 @@ exports.up = (knex) =>
         .references('id')
         .inTable('channels')
         .onDelete('CASCADE')
+        .index();
+      table
+        .integer('owner_id')
+        .unsigned()
+        .references('id')
+        .inTable('users')
         .index();
     });
 
