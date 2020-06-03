@@ -28,3 +28,11 @@
     background-color: #172b4d;
     outline: #172b4d;
 }
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.break-word {
+    word-wrap: break-word;
+}

@@ -26,6 +26,14 @@ export default (router, io) => {
       ctx.body = data;
       io.emit('newColumn', data);
     })
+    .patch('/column/:id', authenticated(), async (ctx) => {
+      const columnId = Number(ctx.params.id);
+      const { attributes } = ctx.request.body.data;
+      const data = await columnsService.updateColumn(columnId, attributes);
+
+      ctx.status = 204;
+      io.emit('updateColumn', data);
+    })
     .delete('/column/:id', authenticated(), async (ctx) => {
       const id = Number(ctx.params.id);
       const data = await columnsService.deleteColumn(id);
@@ -56,6 +64,14 @@ export default (router, io) => {
       io.emit('addTask', data);
 
       // await usersTasksService.insertUsersToTask(users, data.data.id);
+    })
+    .patch('/task/:id', authenticated(), async (ctx) => {
+      const taskId = Number(ctx.params.id);
+      const { attributes } = ctx.request.body.data;
+      const data = await tasksService.updateTask(taskId, attributes);
+
+      ctx.status = 204;
+      io.emit('updateTask', data);
     });
 
   return router
