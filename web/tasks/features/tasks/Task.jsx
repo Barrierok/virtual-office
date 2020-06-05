@@ -1,5 +1,4 @@
 import React from 'react';
-import { FiEdit3 } from 'react-icons/fi';
 import './task.css';
 import { useDispatch } from 'react-redux';
 import { showModal } from '../modal/modalSlice';
@@ -20,13 +19,10 @@ const Task = (props) => {
   };
 
   return (
-    <div className="task">
+    <div className="task cursor-pointer" onClick={handleUpdate}>
       <div className="d-flex justify-content-between overflow-hidden">
         <div className="overflow-hidden">
           <h6>{title}</h6>
-        </div>
-        <div className="cursor-pointer" onClick={handleUpdate}>
-          <FiEdit3 size={15} />
         </div>
       </div>
       <span>{description}</span>

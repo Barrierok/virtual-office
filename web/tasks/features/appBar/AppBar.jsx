@@ -59,6 +59,7 @@ const ReportLink = () => {
     const tasksByColumnId = groupBy(tasks, 'columnId');
 
     const data = columns.reduce((acc, c) => {
+      if (!c) return acc;
       const tasks = tasksByColumnId[c.id];
       if (!tasks) return acc;
       const string = tasks.map((t) => t.title).join(',\n');
