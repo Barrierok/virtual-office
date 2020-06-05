@@ -20,8 +20,8 @@ const columns = createSlice({
     },
     updateColumn(state, action) {
       const { data } = action.payload;
-      state.data = state.data.filter((i) => data.id !== i.id);
-      state.data.push(data);
+      const index = state.data.findIndex((i) => i.id === data.id);
+      state.data.splice(index, 1, data);
     },
     removeColumn(state, action) {
       const { data } = action.payload;
