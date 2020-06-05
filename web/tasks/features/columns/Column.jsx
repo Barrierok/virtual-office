@@ -87,12 +87,10 @@ const Column = (props) => {
           />
         ) : (
           <div
-            className="d-flex justify-content-between overflow-hidden"
+            className="column-header d-flex justify-content-between overflow-hidden"
             onClick={handleUpdate}
           >
-            <div className="">
-              <h6 className="column-header ml-2 mb-0">{column.title}</h6>
-            </div>
+            <h6 className="ml-2">{column.title}</h6>
           </div>
         )}
         <div className="column-tasks" onWheel={stopWheelX}>

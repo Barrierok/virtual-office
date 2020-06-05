@@ -26,7 +26,7 @@ const Dashboard = () => {
           );
         }
         return (
-          <div key={`column-${i.id}`} className="board-item">
+          <div key={`column-${i.id}`} className="board-item h-100">
             <Column column={i} />
           </div>
         );
