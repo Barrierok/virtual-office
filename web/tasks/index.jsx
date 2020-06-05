@@ -13,8 +13,12 @@ import App from './app/App';
 import UsernameContext from '../shared/UsernameContext';
 import { socketEvents } from './utils/constants';
 import reducer from './app/rootReducer';
-import { addColumn, updateColumn } from './features/columns/columnsSlice';
-import { addTask, updateTask } from './features/tasks/tasksSlice';
+import {
+  addColumn,
+  updateColumn,
+  removeColumn,
+} from './features/columns/columnsSlice';
+import { addTask, removeTask, updateTask } from './features/tasks/tasksSlice';
 
 const { username, tasks, columns } = gon;
 
@@ -47,6 +51,12 @@ io()
   })
   .on(socketEvents.updateTask, ({ data }) => {
     store.dispatch(updateTask({ data: data.attributes }));
+  })
+  .on(socketEvents.removeTask, ({ data }) => {
+    store.dispatch(removeTask({ data: data.attributes }));
+  })
+  .on(socketEvents.removeColumn, ({ data }) => {
+    store.dispatch(removeColumn({ data: data.attributes }));
   });
 
 ReactDOM.render(

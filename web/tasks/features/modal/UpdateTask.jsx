@@ -3,7 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { hideModal } from './modalSlice';
 import { useFormik } from 'formik';
-import { fetchUsers, updateTask } from '../../service';
+import { fetchUsers, removeTask, updateTask } from '../../service';
 import { keys, toNumber } from 'lodash';
 /* eslint react/prop-types: 0 */
 
@@ -12,9 +12,7 @@ const UpdateTask = (props) => {
   const [users, setUsers] = useState([]);
   const [isUsersLoading, setUsersLoading] = useState(false);
 
-  const { title, description } = props.data;
-
-  console.log(title, description);
+  const { title, description, id } = props.data;
 
   const formik = useFormik({
     initialValues: {
@@ -42,6 +40,10 @@ const UpdateTask = (props) => {
 
   const handleHideModal = () => {
     dispatch(hideModal());
+  };
+
+  const handleDelete = () => {
+    removeTask(id);
   };
 
   useEffect(() => {
@@ -113,17 +115,24 @@ const UpdateTask = (props) => {
                 </div>
               </div>
             </fieldset>
-            <div className="form-group row justify-content-end">
-              <button className="btn btn-secondary" onClick={handleHideModal}>
-                Отменить
-              </button>
-              <button
-                type="submit"
-                className="btn btn-primary mx-2"
-                disabled={formik.isSubmitting}
-              >
-                Сохранить
-              </button>
+            <div className="form-group row justify-content-between">
+              <div className="ml-2">
+                <button className="btn btn-danger" onClick={handleDelete}>
+                  Удалить
+                </button>
+              </div>
+              <div>
+                <button className="btn btn-secondary" onClick={handleHideModal}>
+                  Отменить
+                </button>
+                <button
+                  type="submit"
+                  className="btn btn-primary mx-2"
+                  disabled={formik.isSubmitting}
+                >
+                  Сохранить
+                </button>
+              </div>
             </div>
           </form>
         </div>

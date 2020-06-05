@@ -4,6 +4,7 @@ export const socketEvents = {
   addTask: 'addTask',
   updateColumn: 'updateColumn',
   updateTask: 'updateTask',
+  removeTask: 'removeTask',
 };
 
 export const modalTypes = {

@@ -1,10 +1,15 @@
 doctype html
 html.h-100(lang="ru")
     head
+        meta(charset='utf-8')
+        meta(name='viewport', content='width=device-width, initial-scale=1, viewport-fit=cover')
+        meta(name='description', content='Менеджер задач виртуального офиса')
+        meta(name='mobile-web-app-capable', content='yes')
         title= Задачи
         meta(name="viewport" content="width=device-width, initial-scale=1")
         script.
           var gon = !{JSON.stringify(gon)};
+
     body.h-100
         #tasks
         script(src='/assets/tasks.bundle.js')

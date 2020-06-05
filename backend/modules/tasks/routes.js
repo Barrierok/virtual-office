@@ -72,6 +72,13 @@ export default (router, io) => {
 
       ctx.status = 204;
       io.emit('updateTask', data);
+    })
+    .delete('/task/:id', authenticated(), async (ctx) => {
+      const taskId = Number(ctx.params.id);
+      const data = await tasksService.deleteTask(taskId);
+
+      ctx.status = 204;
+      io.emit('removeTask', data);
     });
 
   return router

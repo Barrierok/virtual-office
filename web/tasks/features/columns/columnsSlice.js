@@ -23,12 +23,21 @@ const columns = createSlice({
       state.data = state.data.filter((i) => data.id !== i.id);
       state.data.push(data);
     },
+    removeColumn(state, action) {
+      const { data } = action.payload;
+      state.data = state.data.filter((i) => i.id !== data.id);
+    },
   },
 });
 
 const { actions, reducer } = columns;
 
-export const { addColumn, removeNullColumns, updateColumn } = actions;
+export const {
+  addColumn,
+  removeNullColumns,
+  updateColumn,
+  removeColumn,
+} = actions;
 
 export const columnsSelectors = {
   columns: (state) => state.columns.data,

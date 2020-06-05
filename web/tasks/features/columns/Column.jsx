@@ -5,10 +5,10 @@ import { useFormik } from 'formik';
 import { postColumn, removeNullColumns, patchColumn } from './columnsSlice';
 import { tasksSelectors } from '../tasks/tasksSlice';
 import { IoMdAdd } from 'react-icons/io';
-import { FiEdit } from 'react-icons/fi';
 import Task from '../tasks/Task';
 import { showModal } from '../modal/modalSlice';
 import { modalTypes } from '../../utils/constants';
+import { removeColumn } from '../../service';
 /* eslint react/prop-types: 0 */
 const Column = (props) => {
   const dispatch = useDispatch();
@@ -86,15 +86,12 @@ const Column = (props) => {
             callback={dispatchedUpdateColumn}
           />
         ) : (
-          <div className="d-flex justify-content-between overflow-hidden">
+          <div
+            className="d-flex justify-content-between overflow-hidden"
+            onClick={handleUpdate}
+          >
             <div className="">
-              <h6 className="column-header ml-2 mb-0 ">{column.title}</h6>
-            </div>
-            <div
-              onClick={handleUpdate}
-              className="d-flex justify-content-center flex-column mr-2 cursor-pointer edit-btn"
-            >
-              <FiEdit />
+              <h6 className="column-header ml-2 mb-0">{column.title}</h6>
             </div>
           </div>
         )}
@@ -133,20 +130,48 @@ const UpdateForm = (props) => {
     },
   });
 
+  const handleCloseUpdate = () => {
+    setUpdateState(false);
+  };
+
+  const handleDelete = async () => {
+    await removeColumn(column.id);
+  };
+
+  const onEnterPress = (e) => {
+    if (e.keyCode === 13 && e.shiftKey === false) {
+      e.preventDefault();
+      formik.handleSubmit(e);
+    }
+  };
+
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <div className="form-group">
-        <input
-          type="text"
-          className="form-control"
-          value={formik.values.columnName}
-          name="columnName"
-          onChange={formik.handleChange}
-          autoFocus
-        />
+    <div className="position-relative">
+      <form onSubmit={formik.handleSubmit}>
+        <div className="form-group">
+          <textarea
+            className="form-control"
+            value={formik.values.columnName}
+            name="columnName"
+            onChange={formik.handleChange}
+            autoFocus
+            onKeyDown={onEnterPress}
+          />
+        </div>
+        <button onClick={formik.handleSubmit} type="submit" hidden />
+      </form>
+      <div
+        className="d-flex justify-content-around mb-4"
+        style={{ marginTop: '-5px' }}
+      >
+        <button onClick={handleCloseUpdate} className="btn btn-secondary">
+          Отменить
+        </button>
+        <button onClick={handleDelete} className="btn btn-danger">
+          Удалить
+        </button>
       </div>
-      <button onClick={formik.handleSubmit} type="submit" hidden />
-    </form>
+    </div>
   );
 };
 
