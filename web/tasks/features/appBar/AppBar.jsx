@@ -9,11 +9,12 @@ import {
   removeNullColumns,
 } from '../columns/columnsSlice';
 import { tasksSelectors } from '../tasks/tasksSlice';
+import { groupBy } from 'lodash';
 
 const navItems = [
   {
     id: 1,
-    title: 'Добавить ещё колонку',
+    title: 'Добавить колонку',
     icon: <IoMdAdd />,
     handler: 'addNewColumn',
   },
@@ -55,13 +56,17 @@ const ReportLink = () => {
   const columns = useSelector(columnsSelectors.columns);
 
   const getReportLink = () => {
-    console.log(tasks);
-    console.log(columns);
+    const tasksByColumnId = groupBy(tasks, 'columnId');
 
-    const data = [
-      ['name1', 'city1', 'some other info'],
-      ['name2', 'city2', 'more info'],
-    ];
+    const data = columns.reduce((acc, c) => {
+      const tasks = tasksByColumnId[c.id];
+      if (!tasks) return acc;
+      const string = tasks.map((t) => t.title).join(',\n');
+      return [...acc, [c.title, string]];
+    }, []);
+
+    data.push(['', '']);
+    data.push(['Затраченное время:', '00:00']);
 
     return JSONToCSVConvertor(data);
   };
@@ -78,13 +83,13 @@ const ReportLink = () => {
 };
 
 function JSONToCSVConvertor(arrData) {
-  let CSV = 'sep=,' + '\r\n\n';
+  let CSV = '';
 
   for (let i = 0; i < arrData.length; i++) {
     let row = '';
 
     for (let index in arrData[i]) {
-      row += '"' + arrData[i][index] + '",';
+      row += '"' + arrData[i][index] + '";';
     }
 
     row.slice(0, row.length - 1);
@@ -92,7 +97,10 @@ function JSONToCSVConvertor(arrData) {
     CSV += row + '\r\n';
   }
 
-  return 'data:text/csv;charset=utf-8,' + escape(CSV);
+  return (
+    'data:text/csv; charset=utf-8,%EF%BB%BF' +
+    encodeURIComponent('\uFEFF' + CSV)
+  );
 }
 
 export default AppBar;

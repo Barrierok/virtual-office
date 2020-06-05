@@ -105,7 +105,7 @@ const Column = (props) => {
           <span>
             <IoMdAdd />
           </span>{' '}
-          <span className="cursor-pointer">Добавить еще карточку</span>
+          <span className="cursor-pointer">Добавить карточку</span>
         </div>
       </div>
     </div>
