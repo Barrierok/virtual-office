@@ -39,6 +39,7 @@ const Dashboard = () => {
                 {...provided.droppableProps}
               >
                 <Column column={i} />
+                {provided.placeholder}
               </div>
             )}
           </Droppable>

@@ -9,21 +9,41 @@ import ModalRoot from '../features/modal/ModalRoot';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { toNumber } from 'lodash';
 import { updateTask } from '../service';
+import {
+  tasksSelectors,
+  updateTask as reduxUpdateTask,
+} from '../features/tasks/tasksSlice';
+import { useDispatch, useSelector } from 'react-redux';
 /* eslint-disable react/prop-types*/
-const App = (props) => {
-  const { tasks } = props;
+const App = () => {
+  const dispatch = useDispatch();
+  const tasks = useSelector(tasksSelectors.tasks);
 
-  const onDragEnd = useCallback((data) => {
-    console.log(data);
-    const destinationColumnId = toNumber(data.destination.droppableId);
-    const draggableTaskId = toNumber(data.draggableId);
+  const onDragEnd = useCallback(
+    (data) => {
+      if (!data?.destination) return;
+      const destinationColumnId = toNumber(data.destination.droppableId);
+      const draggableTaskId = toNumber(data.draggableId);
 
-    const update = async () => {
-      await updateTask(draggableTaskId, { columnId: destinationColumnId });
-    };
+      // const destinationIndex = data.destination.index;
 
-    update();
-  }, []);
+      const update = async () => {
+        await updateTask(draggableTaskId, { columnId: destinationColumnId });
+      };
+
+      const task = tasks.filter((i) => i.id === draggableTaskId)[0];
+      dispatch(
+        reduxUpdateTask({
+          data: {
+            ...task,
+            columnId: destinationColumnId,
+          },
+        })
+      );
+      update();
+    },
+    [tasks, dispatch]
+  );
 
   return (
     <>
@@ -35,7 +55,7 @@ const App = (props) => {
           </Row>
           <Row as="article" className="h-100">
             <DragDropContext onDragEnd={onDragEnd}>
-              <Dashboard tasks={tasks} />
+              <Dashboard />
             </DragDropContext>
           </Row>
         </div>
