@@ -9,6 +9,7 @@ import Task from '../tasks/Task';
 import { showModal } from '../modal/modalSlice';
 import { modalTypes } from '../../utils/constants';
 import { removeColumn } from '../../service';
+import { Draggable } from 'react-beautiful-dnd';
 /* eslint react/prop-types: 0 */
 const Column = (props) => {
   const dispatch = useDispatch();
@@ -94,8 +95,22 @@ const Column = (props) => {
           </div>
         )}
         <div className="column-tasks" onWheel={stopWheelX}>
-          {columnTasks.map((i) => (
-            <Task task={i} key={i.id} />
+          {columnTasks.map((i, index) => (
+            <Draggable
+              key={`task-${i.id}`}
+              draggableId={`${i.id}`}
+              index={index}
+            >
+              {(provided) => (
+                <div
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                >
+                  <Task task={i} />
+                </div>
+              )}
+            </Draggable>
           ))}
         </div>
         <hr />
