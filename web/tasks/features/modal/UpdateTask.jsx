@@ -3,6 +3,7 @@ import { Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { hideModal } from './modalSlice';
 import { useFormik } from 'formik';
+import { FaPlay, FaPause } from 'react-icons/fa';
 import { fetchUsers, removeTask, updateTask } from '../../service';
 import { keys, toNumber } from 'lodash';
 /* eslint react/prop-types: 0 */
@@ -58,7 +59,10 @@ const UpdateTask = (props) => {
 
   return (
     <Modal size="lg" show onHide={handleHideModal} className="confirm">
-      <Modal.Header closeButton>Обновление задачи {title}</Modal.Header>
+      <Modal.Header closeButton>
+        Обновление задачи
+        <span className="font-weight-bold ml-1"> {title}</span>
+      </Modal.Header>
       <Modal.Body className="d-flex justify-content-around">
         <div className="add-task-form w-100">
           <form onSubmit={formik.handleSubmit}>
@@ -112,6 +116,17 @@ const UpdateTask = (props) => {
                       </div>
                     );
                   })}
+                </div>
+              </div>
+              <div className="row mt-4">
+                <legend className="col-form-label col-sm-2">Таймер</legend>
+                <div className="col-4">
+                  <input type="text" value="00:00" className="form-control" />
+                </div>
+                <div className="col-4 d-flex my-auto">
+                  <FaPlay fill={'#0e9905'} />
+                  <div className="ml-2" />
+                  <FaPause fill={'#a5410a'} />
                 </div>
               </div>
             </fieldset>
