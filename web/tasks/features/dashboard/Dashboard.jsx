@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Column from '../columns/Column';
 import { columnsSelectors } from '../columns/columnsSlice';
+import { Droppable } from 'react-beautiful-dnd';
 
 const Dashboard = () => {
   const columns = useSelector(columnsSelectors.columns);
@@ -26,9 +27,22 @@ const Dashboard = () => {
           );
         }
         return (
-          <div key={`column-${i.id}`} className="board-item">
-            <Column column={i} />
-          </div>
+          <Droppable
+            key={`column-${i.id}`}
+            droppableId={`${i.id}`}
+            type="COLUMN"
+          >
+            {(provided) => (
+              <div
+                className="board-item h-100"
+                ref={provided.innerRef}
+                {...provided.droppableProps}
+              >
+                <Column column={i} />
+                {provided.placeholder}
+              </div>
+            )}
+          </Droppable>
         );
       })}
     </div>

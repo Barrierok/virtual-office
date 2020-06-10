@@ -14,6 +14,15 @@ const tasks = createSlice({
       const { data } = action.payload;
       state.data.push(data);
     },
+    updateTask(state, action) {
+      const { data } = action.payload;
+      const index = state.data.findIndex((i) => i.id === data.id);
+      state.data.splice(index, 1, data);
+    },
+    removeTask(state, action) {
+      const { data } = action.payload;
+      state.data = state.data.filter((i) => i.id !== data.id);
+    },
   },
 });
 
@@ -23,6 +32,6 @@ export const tasksSelectors = {
   tasks: (state) => state.tasks.data,
 };
 
-export const { addTask } = actions;
+export const { addTask, updateTask, removeTask } = actions;
 
 export default reducer;

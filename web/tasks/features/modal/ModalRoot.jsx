@@ -4,9 +4,11 @@ import { useSelector } from 'react-redux';
 import { createSelector } from '@reduxjs/toolkit';
 import { modalTypes } from '../../utils/constants';
 import AddTask from './AddTask';
+import UpdateTask from './UpdateTask';
 
 const types = {
   [modalTypes.addTask]: AddTask,
+  [modalTypes.updateTask]: UpdateTask,
 };
 
 const getModalData = createSelector(

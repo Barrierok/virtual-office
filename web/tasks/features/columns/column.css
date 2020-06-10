@@ -1,5 +1,5 @@
 .column-cnt {
-    width: 272px;
+    width: 275px;
     margin: 0 4px;
     height: 85vh;
     box-sizing: border-box;
@@ -26,16 +26,13 @@
 }
 
 .column-header {
-    flex: 0 0 auto;
     padding: 10px 8px;
-    position: relative;
-    min-height: 20px;
+    min-height: 50px !important;
     color: #172b4d;
 }
 
 .column-tasks {
-    flex: 1 1 auto;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
     margin: 0 4px;
     padding: 0 4px;
@@ -51,6 +48,8 @@
     color: #5e6c84;
 }
 
-.add-task {
-    cursor: pointer;
+@media screen and (max-width: 500px){
+    .column-cnt {
+        padding-bottom: 130px;
+    }
 }

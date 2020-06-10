@@ -21,7 +21,8 @@ export default class TasksRepository {
   }
 
   updateTask(id, newData) {
-    return this.model.query().findById(id).patch(newData).returning('*');
+    const { users, ...rest } = newData;
+    return this.model.query().findById(id).patch(rest).returning('*');
   }
 
   deleteTask(id) {
