@@ -1,11 +1,15 @@
-# diploma
+# Кооперативная ВКР на тему "Виртуальный офис"
 
-Можно потестить: [Чат](https://hhdiploma.herokuapp.com/chat)
+Можно протестировать: [Виртуальный офис](https://hhdiploma.herokuapp.com)
+
+* Разработка модуля "Менеджер задач" велась [Александром Колиух](https://github.com/AlexandrKoliukh)
+* Разработка модуля "Лента новостей" велась [Павлом Дерюгиным](https://github.com/PavelDeuce)
+* Разработка модуля "Чат" и системой авторизации приложения велась [Ильей Зубцовым](https://github.com/Barrierok)
 
 Чтобы заработал проект для разработки нужно сделать несколько вещей:
 
 1. Создать пользователя с паролем в PostgreSQL.
-2. Создать базу данных hhapp и дать новому пользователю права в ней (см. [Создание пользователя и БД](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e))
+2. Создать базу данных и дать новому пользователю права в ней (см. [Создание пользователя и БД](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e))
 3. Создать и заполнить .env файл по примеру .env.example
 4. Прописать следующие команды для начала разработки:
 
